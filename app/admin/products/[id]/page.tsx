@@ -2,19 +2,47 @@ import { redirect, notFound } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 import { AdminSidebar } from "@/components/admin/sidebar";
 import { ProductForm } from "@/components/admin/product-form";
-import { prisma } from "@/lib/prisma";
+import { createSupabaseAdminClient } from "@/lib/supabase-admin";
 
 async function getProduct(id: string) {
-  return await prisma.product.findUnique({
-    where: { id },
-    include: { category: true },
-  });
+  const supabase = createSupabaseAdminClient();
+  
+  const { data: product, error } = await supabase
+    .from("products")
+    .select(`
+      *,
+      categories (
+        id,
+        name
+      )
+    `)
+    .eq("id", id)
+    .single();
+
+  if (error || !product) {
+    return null;
+  }
+
+  return {
+    ...product,
+    category: product.categories,
+  };
 }
 
 async function getCategories() {
-  return await prisma.category.findMany({
-    orderBy: { name: "asc" },
-  });
+  const supabase = createSupabaseAdminClient();
+  
+  const { data: categories, error } = await supabase
+    .from("categories")
+    .select("*")
+    .order("name");
+
+  if (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
+
+  return categories || [];
 }
 
 export default async function EditProductPage({

@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { prisma } from "@/lib/prisma";
-import { transformProduct, transformProductForDB } from "@/lib/utils";
+import { createSupabaseAdminClient } from "@/lib/supabase-admin";
 
 async function checkAdminAuth() {
   const cookieStore = cookies();
@@ -53,21 +52,32 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const product = await prisma.product.findUnique({
-      where: { id: params.id },
-      include: {
-        category: true,
-      },
-    });
+    const supabase = createSupabaseAdminClient();
 
-    if (!product) {
-      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    const { data: product, error } = await supabase
+      .from("products")
+      .select(`
+        *,
+        categories (
+          id,
+          name
+        )
+      `)
+      .eq("id", params.id)
+      .single();
+
+    if (error) {
+      if (error.code === "PGRST116") {
+        return NextResponse.json({ error: "Product not found" }, { status: 404 });
+      }
+      console.error("Error fetching product:", error);
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 }
+      );
     }
 
-    // Transform product to convert images from JSON string to array
-    const transformedProduct = transformProduct(product);
-
-    return NextResponse.json(transformedProduct);
+    return NextResponse.json(product);
   } catch (error) {
     console.error("Error fetching product:", error);
     return NextResponse.json(
@@ -88,31 +98,83 @@ export async function PUT(
   }
 
   try {
+    const supabase = createSupabaseAdminClient();
     const body = await request.json();
-    const { name, description, price, categoryId, images, active } = body;
-
-    // Transform images array to JSON string for database storage
-    const productData = transformProductForDB({
+    
+    const {
       name,
       description,
       price,
-      categoryId,
+      category_id,
       images,
       active,
+      fabric,
+      color,
+      size,
+      weight,
+      occasion,
+      tags,
+      featured,
+      in_stock,
+      stock_count,
+    } = body;
+
+    // Create slug from name if name is provided
+    const updateData: any = {
+      description,
+      price: price ? parseFloat(price) : undefined,
+      category_id,
+      images: images || [],
+      active,
+      fabric,
+      color,
+      size,
+      weight,
+      occasion,
+      tags: tags || [],
+      featured,
+      in_stock,
+      stock_count: stock_count ? parseInt(stock_count) : undefined,
+      updated_at: new Date().toISOString(),
+    };
+
+    if (name) {
+      updateData.name = name;
+      updateData.slug = name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    }
+
+    // Remove undefined values
+    Object.keys(updateData).forEach(key => {
+      if (updateData[key] === undefined) {
+        delete updateData[key];
+      }
     });
 
-    const product = await prisma.product.update({
-      where: { id: params.id },
-      data: productData,
-      include: {
-        category: true,
-      },
-    });
+    const { data: product, error } = await supabase
+      .from("products")
+      .update(updateData)
+      .eq("id", params.id)
+      .select(`
+        *,
+        categories (
+          id,
+          name
+        )
+      `)
+      .single();
 
-    // Transform back to frontend format
-    const transformedProduct = transformProduct(product);
+    if (error) {
+      console.error("Error updating product:", error);
+      return NextResponse.json(
+        { error: "Failed to update product" },
+        { status: 500 }
+      );
+    }
 
-    return NextResponse.json(transformedProduct);
+    return NextResponse.json(product);
   } catch (error) {
     console.error("Error updating product:", error);
     return NextResponse.json(
@@ -133,25 +195,43 @@ export async function PATCH(
   }
 
   try {
+    const supabase = createSupabaseAdminClient();
     const body = await request.json();
 
-    // If images are being updated, transform them
-    if (body.images) {
-      body.images = transformProductForDB({ images: body.images }).images;
-    }
+    const updateData = {
+      ...body,
+      updated_at: new Date().toISOString(),
+    };
 
-    const product = await prisma.product.update({
-      where: { id: params.id },
-      data: body,
-      include: {
-        category: true,
-      },
+    // Remove undefined values
+    Object.keys(updateData).forEach(key => {
+      if (updateData[key] === undefined) {
+        delete updateData[key];
+      }
     });
 
-    // Transform back to frontend format
-    const transformedProduct = transformProduct(product);
+    const { data: product, error } = await supabase
+      .from("products")
+      .update(updateData)
+      .eq("id", params.id)
+      .select(`
+        *,
+        categories (
+          id,
+          name
+        )
+      `)
+      .single();
 
-    return NextResponse.json(transformedProduct);
+    if (error) {
+      console.error("Error updating product:", error);
+      return NextResponse.json(
+        { error: "Failed to update product" },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(product);
   } catch (error) {
     console.error("Error updating product:", error);
     return NextResponse.json(
@@ -172,9 +252,20 @@ export async function DELETE(
   }
 
   try {
-    await prisma.product.delete({
-      where: { id: params.id },
-    });
+    const supabase = createSupabaseAdminClient();
+
+    const { error } = await supabase
+      .from("products")
+      .delete()
+      .eq("id", params.id);
+
+    if (error) {
+      console.error("Error deleting product:", error);
+      return NextResponse.json(
+        { error: "Failed to delete product" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
