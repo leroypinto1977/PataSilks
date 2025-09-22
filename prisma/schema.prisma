@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(cuid())
+  email    String @unique
+  name     String?
+  password String?
+  role     String @default("USER") // USER or ADMIN
+  avatar   String?
+  
+  // Supabase auth integration
+  supabaseId String? @unique
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Category {
+  id          String @id @default(cuid())
+  name        String @unique
+  description String?
+  
+  products Product[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model Product {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  price        Float
+  images       String[] // Array of image URLs (PostgreSQL supports arrays)
+  active       Boolean  @default(true)
+  
+  // Inventory tracking
+  inStock      Boolean  @default(true)
+  stockCount   Int      @default(1) // Usually 1 for unique designs
+  sold         Boolean  @default(false)
+  soldAt       DateTime?
+  
+  // Product details
+  fabric       String?
+  color        String?
+  size         String?
+  weight       String?
+  occasion     String?
+  
+  // SEO and metadata
+  slug         String?  @unique
+  tags         String[]
+  featured     Boolean  @default(false)
+  newArrival   Boolean  @default(true) // Auto-set for recent additions
+  
+  category     Category @relation(fields: [categoryId], references: [id])
+  categoryId   String
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("products")
+}
+
+model Order {
+  id          String @id @default(cuid())
+  email       String
+  totalAmount Float
+  status      String @default("PENDING") // PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED
+  
+  // Customer details
+  customerName    String
+  customerPhone   String
+  shippingAddress String
+  billingAddress  String?
+  
+  // Payment details
+  paymentMethod   String?
+  paymentStatus   String @default("PENDING") // PENDING, PAID, FAILED, REFUNDED
+  paymentId       String?
+  
+  items       OrderItem[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  quantity  Int
+  price     Float
+  
+  order     Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+  
+  productId   String
+  productName String
+  productSlug String?
+
+  @@map("order_items")
+}
+
+// Analytics and tracking
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  userAgent String?
+  ip        String?
+  country   String?
+  
+  createdAt DateTime @default(now())
+
+  @@map("page_views")
+}
+
+model ProductView {
+  id        String   @id @default(cuid())
+  productId String
+  userAgent String?
+  ip        String?
+  
+  createdAt DateTime @default(now())
+
+  @@map("product_views")
+}

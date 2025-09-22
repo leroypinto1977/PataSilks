@@ -1,0 +1,320 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Customer Website Theme - Light Pink & White */
+    --primary-pink: #f8e8e9;
+    --primary-pink-light: #fdf5f6;
+    --primary-pink-medium: #f5d0d3;
+    --primary-pink-dark: #e8b4b8;
+    --primary-pink-deep: #d4949a;
+    --rose-gold: #e8b4b8;
+    --blush: #f5c2c7;
+    --champagne: #f7e7ce;
+
+    /* Admin Panel Theme - Dark Monochromatic */
+    --admin-black: #000000;
+    --admin-dark: #1a1a1a;
+    --admin-medium: #2d2d2d;
+    --admin-light: #404040;
+    --admin-lighter: #595959;
+    --admin-white: #ffffff;
+    --admin-off-white: #f5f5f5;
+    --admin-accent: #e8b4b8;
+
+    /* Typography */
+    --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    --font-secondary: "Playfair Display", Georgia, serif;
+    --font-accent: "Crimson Text", Georgia, serif;
+
+    /* Shadows & Effects */
+    --shadow-soft: rgba(232, 180, 184, 0.1);
+    --shadow-medium: rgba(212, 148, 154, 0.15);
+    --border-light: rgba(232, 180, 184, 0.2);
+    --border-medium: rgba(232, 180, 184, 0.4);
+
+    /* Original shadcn variables - updated for pink theme */
+    --background: 329 100% 98%;
+    --foreground: 330 20% 15%;
+    --card: 329 100% 99%;
+    --card-foreground: 330 20% 15%;
+    --popover: 329 100% 99%;
+    --popover-foreground: 330 20% 15%;
+    --primary: 343 74% 60%;
+    --primary-foreground: 329 100% 98%;
+    --secondary: 336 39% 90%;
+    --secondary-foreground: 330 20% 15%;
+    --muted: 336 39% 94%;
+    --muted-foreground: 330 8% 46%;
+    --accent: 343 38% 85%;
+    --accent-foreground: 330 20% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 336 33% 86%;
+    --input: 336 33% 86%;
+    --ring: 343 74% 60%;
+    --radius: 1rem;
+  }
+
+  .admin-theme {
+    /* Admin Panel Dark Theme Variables */
+    --background: 0 0% 10%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 18%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 18%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 343 74% 60%;
+    --primary-foreground: 0 0% 96%;
+    --secondary: 0 0% 25%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 25%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 96%;
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 343 74% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-all duration-300 ease-out;
+    font-family: var(--font-primary);
+  }
+
+  .admin-layout {
+    @apply admin-theme;
+  }
+
+  /* Typography Classes */
+  .heading-primary {
+    font-family: var(--font-secondary);
+    @apply font-bold text-gray-900;
+  }
+
+  .heading-secondary {
+    font-family: var(--font-secondary);
+    @apply font-semibold text-gray-800;
+  }
+
+  .body-text {
+    font-family: var(--font-primary);
+    @apply font-normal text-gray-600 leading-relaxed;
+  }
+
+  .premium-text {
+    font-family: var(--font-accent);
+    @apply italic text-primary-pink-400;
+  }
+
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--primary-pink-light);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary-pink-dark);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-pink-deep);
+  }
+}
+
+@layer components {
+  /* Premium Button Styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-pink-300 to-rose-gold hover:from-primary-pink-400 hover:to-primary-pink-300 text-white border-none px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-out shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary-pink-400 border-2 border-primary-pink-200 hover:bg-primary-pink-50 hover:border-primary-pink-300 px-6 py-2 rounded-lg transition-all duration-300;
+  }
+
+  /* Premium Card Styles */
+  .luxury-card {
+    @apply bg-white/90 backdrop-blur-sm border border-primary-pink-200/50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1;
+  }
+
+  .premium-card {
+    background: linear-gradient(145deg, #ffffff, var(--primary-pink-light));
+    @apply border border-rose-gold rounded-2xl shadow-lg;
+  }
+
+  /* Product Card Styles */
+  .product-card {
+    @apply bg-white border border-primary-pink-200/30 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1;
+  }
+
+  .product-card:hover {
+    border-color: var(--border-medium);
+    box-shadow: 0 8px 32px var(--shadow-medium);
+  }
+
+  /* Navigation Styles */
+  .nav-link {
+    @apply text-gray-700 hover:text-primary-pink-400 font-medium transition-colors duration-200 relative;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-pink-300 to-rose-gold transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Glass Morphism Effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-light);
+  }
+
+  /* Modern Gradient Backgrounds */
+  .gradient-primary {
+    background: linear-gradient(
+      135deg,
+      var(--primary-pink-light) 0%,
+      #ffffff 100%
+    );
+  }
+
+  .gradient-hero {
+    background: linear-gradient(
+      135deg,
+      var(--primary-pink-light) 0%,
+      var(--champagne) 50%,
+      #ffffff 100%
+    );
+  }
+
+  /* Admin Theme Components */
+  .admin-card {
+    background-color: var(--admin-medium);
+    border: 1px solid var(--admin-light);
+    border-radius: 0.5rem;
+    color: var(--admin-off-white);
+  }
+
+  .admin-nav-item {
+    color: var(--admin-off-white);
+    padding: 0.75rem 1.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .admin-nav-item:hover {
+    background-color: var(--admin-medium);
+    color: var(--admin-white);
+  }
+
+  .admin-nav-item.active {
+    background-color: var(--admin-medium);
+    color: var(--admin-white);
+    border-left: 4px solid var(--admin-accent);
+  }
+
+  /* Loading Animation */
+  @keyframes shimmer {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
+
+  .loading-shimmer {
+    background: linear-gradient(
+      90deg,
+      #f8f9fa 25%,
+      var(--primary-pink-light) 50%,
+      #f8f9fa 75%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Hover Animations */
+  .hover-lift {
+    @apply transition-transform duration-300;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300;
+  }
+
+  .hover-scale:hover {
+    @apply scale-105;
+  }
+
+  /* Elegant Shadows */
+  .shadow-elegant {
+    box-shadow: 0 10px 40px rgba(232, 180, 184, 0.1),
+      0 4px 12px rgba(232, 180, 184, 0.05);
+  }
+}
+
+/* Legacy styles - will be deprecated */
+.luxury-button {
+  @apply btn-primary;
+}
+
+.hero-gradient {
+  @apply gradient-hero;
+}
+
+/* Custom color utilities for backward compatibility */
+.bg-cream-50 {
+  background-color: #faf7f0;
+}
+.bg-cream-100 {
+  background-color: #f5f3ee;
+}
+.bg-cream-200 {
+  background-color: #f0ede6;
+}
+.text-brown-900 {
+  color: #2d1b15;
+}
+.text-brown-700 {
+  color: #5c4033;
+}
+.text-brown-600 {
+  color: #8b4a54;
+}
+.border-amber-100 {
+  border-color: var(--border-light);
+}
+.border-amber-200 {
+  border-color: var(--border-medium);
+}
