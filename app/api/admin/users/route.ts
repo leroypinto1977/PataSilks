@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase-admin";
 import { Database } from "@/types/database";
 
+// Force dynamic rendering for this route
+export const dynamic = 'force-dynamic';
+
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
 export async function GET() {

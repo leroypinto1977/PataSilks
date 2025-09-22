@@ -9,6 +9,8 @@ export interface Database {
           full_name: string | null;
           avatar_url: string | null;
           role: "user" | "admin";
+          suspended: boolean | null;
+          suspended_at: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -18,6 +20,8 @@ export interface Database {
           full_name?: string | null;
           avatar_url?: string | null;
           role?: "user" | "admin";
+          suspended?: boolean | null;
+          suspended_at?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -27,6 +31,8 @@ export interface Database {
           full_name?: string | null;
           avatar_url?: string | null;
           role?: "user" | "admin";
+          suspended?: boolean | null;
+          suspended_at?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -216,6 +222,32 @@ export interface Database {
           created_at?: string;
         };
       };
+      cart_items: {
+        Row: {
+          id: string;
+          user_id: string;
+          product_id: string;
+          quantity: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          product_id: string;
+          quantity?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          product_id?: string;
+          quantity?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
@@ -264,6 +296,12 @@ export type OrderItemInsert =
   Database["public"]["Tables"]["order_items"]["Insert"];
 export type OrderItemUpdate =
   Database["public"]["Tables"]["order_items"]["Update"];
+
+export type CartItem = Database["public"]["Tables"]["cart_items"]["Row"];
+export type CartItemInsert =
+  Database["public"]["Tables"]["cart_items"]["Insert"];
+export type CartItemUpdate =
+  Database["public"]["Tables"]["cart_items"]["Update"];
 
 // Extended types with relationships
 export type ProductWithCategory = Product & {
