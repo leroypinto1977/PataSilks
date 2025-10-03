@@ -39,25 +39,25 @@
     --border-medium: rgba(232, 180, 184, 0.4);
 
     /* Original shadcn variables - updated for pink theme */
-    --background: 329 100% 98%;
+    --background: 30 25% 95%;
     --foreground: 330 20% 15%;
-    --card: 329 100% 99%;
+    --card: 30 25% 98%;
     --card-foreground: 330 20% 15%;
-    --popover: 329 100% 99%;
+    --popover: 30 25% 98%;
     --popover-foreground: 330 20% 15%;
-    --primary: 343 74% 60%;
-    --primary-foreground: 329 100% 98%;
-    --secondary: 336 39% 90%;
+    --primary: 30 25% 65%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 30 25% 90%;
     --secondary-foreground: 330 20% 15%;
-    --muted: 336 39% 94%;
+    --muted: 30 25% 94%;
     --muted-foreground: 330 8% 46%;
-    --accent: 343 38% 85%;
+    --accent: 30 25% 85%;
     --accent-foreground: 330 20% 15%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 336 33% 86%;
-    --input: 336 33% 86%;
-    --ring: 343 74% 60%;
+    --border: 30 25% 86%;
+    --input: 30 25% 86%;
+    --ring: 30 25% 65%;
     --radius: 1rem;
   }
 
@@ -81,7 +81,7 @@
     --destructive-foreground: 0 0% 96%;
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 343 74% 60%;
+    --ring: 30 25% 65%;
   }
 }
 
@@ -132,42 +132,42 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--primary-pink-light);
+    background: #f5f0e8; /* warm-beige */
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--primary-pink-dark);
+    background: #d4c4b0; /* rich-beige */
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-pink-deep);
+    background: #c4b299; /* darker rich-beige */
   }
 }
 
 @layer components {
   /* Premium Button Styles */
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-pink-300 to-rose-gold hover:from-primary-pink-400 hover:to-primary-pink-300 text-white border-none px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-out shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    @apply bg-gradient-to-r from-rich-beige to-rich-beige hover:from-rich-beige hover:to-rich-beige text-white border-none px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-out shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
   }
 
   .btn-secondary {
-    @apply bg-white text-primary-pink-400 border-2 border-primary-pink-200 hover:bg-primary-pink-50 hover:border-primary-pink-300 px-6 py-2 rounded-lg transition-all duration-300;
+    @apply bg-white text-rich-beige border-2 border-rich-beige/30 hover:bg-rich-beige/5 hover:border-rich-beige px-6 py-2 rounded-lg transition-all duration-300;
   }
 
   /* Premium Card Styles */
   .luxury-card {
-    @apply bg-white/90 backdrop-blur-sm border border-primary-pink-200/50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1;
+    @apply bg-white/90 backdrop-blur-sm border border-rich-beige/20 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1;
   }
 
   .premium-card {
-    background: linear-gradient(145deg, #ffffff, var(--primary-pink-light));
-    @apply border border-rose-gold rounded-2xl shadow-lg;
+    background: linear-gradient(145deg, #ffffff, #f5f0e8);
+    @apply border border-rich-beige rounded-2xl shadow-lg;
   }
 
   /* Product Card Styles */
   .product-card {
-    @apply bg-white border border-primary-pink-200/30 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1;
+    @apply bg-white border border-rich-beige/20 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1;
   }
 
   .product-card:hover {

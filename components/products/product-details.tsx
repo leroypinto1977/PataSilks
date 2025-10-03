@@ -5,28 +5,53 @@ import { ShoppingCart, Heart, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/hooks/use-cart";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string | null;
-  price: number;
-  images: string[];
-  categories?: {
-    name: string;
-  };
-  fabric?: string | null;
-  color?: string | null;
-  occasion?: string | null;
-  tags?: string[];
-  featured?: boolean;
-  new_arrival?: boolean;
-  in_stock?: boolean;
-  stock_count?: number;
-}
+import { SanityProduct } from "@/types/sanity";
+import { urlFor } from "@/lib/sanity";
 
 interface ProductDetailsProps {
-  product: Product;
+  product: SanityProduct;
+}
+
+// Helper function to safely get product image URL
+function getProductImageUrl(product: SanityProduct): string {
+  try {
+    // Check if product has images and the first image is valid
+    if (product.images && product.images.length > 0 && product.images[0]) {
+      const image = product.images[0];
+
+      // Check if the image has a valid asset reference
+      if (image.asset && image.asset._ref) {
+        // Validate the asset reference format - should start with 'image-' and contain a valid ID
+        const assetRef = image.asset._ref;
+        if (
+          assetRef.startsWith("image-") &&
+          assetRef.includes("-") &&
+          !assetRef.includes("?")
+        ) {
+          return urlFor(image).width(400).height(500).url();
+        }
+      }
+
+      // If image has a direct URL (fallback)
+      if (typeof image === "string") {
+        return image;
+      }
+
+      // If image has a url property (direct URL) - check if it's a string
+      if (
+        typeof image === "object" &&
+        "url" in image &&
+        typeof image.url === "string"
+      ) {
+        return image.url;
+      }
+    }
+  } catch (error) {
+    console.warn("Error processing product image:", error);
+  }
+
+  // Return placeholder if no valid image found
+  return "/placeholder-product.jpg";
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
@@ -38,10 +63,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     setIsAddingToCart(true);
 
     addItem({
-      id: product.id,
+      id: product._id,
       name: product.name,
       price: product.price,
-      image: product.images[0] || "/placeholder-product.jpg",
+      image: getProductImageUrl(product),
     });
 
     setTimeout(() => setIsAddingToCart(false), 1000);
@@ -62,11 +87,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       <div className="flex gap-2 flex-wrap">
         <Badge
           variant="secondary"
-          className="bg-primary-pink-100 text-primary-pink-800 hover:bg-primary-pink-200"
+          className="bg-rich-beige/10 text-rich-beige hover:bg-rich-beige/20"
         >
-          {product.categories?.name || "Traditional Wear"}
+          {product.category.name}
         </Badge>
-        {product.new_arrival && (
+        {product.newArrival && (
           <Badge className="bg-green-100 text-green-800 hover:bg-green-200">
             New Arrival
           </Badge>
@@ -85,13 +110,24 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
       {/* Price */}
       <div className="flex items-center space-x-4">
-        <p className="text-3xl font-bold text-primary-pink-600">
+        <p className="text-3xl font-bold text-rich-beige">
           {formatPrice(product.price)}
         </p>
-        <p className="text-gray-600 line-through">
-          {formatPrice(product.price * 1.2)}
-        </p>
-        <Badge variant="destructive">20% OFF</Badge>
+        {product.originalPrice && product.originalPrice > product.price && (
+          <>
+            <p className="text-gray-600 line-through">
+              {formatPrice(product.originalPrice)}
+            </p>
+            <Badge variant="destructive">
+              {Math.round(
+                ((product.originalPrice - product.price) /
+                  product.originalPrice) *
+                  100
+              )}
+              % OFF
+            </Badge>
+          </>
+        )}
       </div>
 
       {/* Description */}
@@ -108,29 +144,29 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           Product Highlights
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="flex items-center space-x-3 p-3 bg-primary-pink-50 rounded-lg">
-            <div className="w-8 h-8 bg-primary-pink-200 rounded-full flex items-center justify-center">
-              <span className="text-primary-pink-700 text-sm">✨</span>
+          <div className="flex items-center space-x-3 p-3 bg-rich-beige/5 rounded-lg">
+            <div className="w-8 h-8 bg-rich-beige/20 rounded-full flex items-center justify-center">
+              <span className="text-rich-beige text-sm">✨</span>
             </div>
             <span className="text-gray-800 font-medium">100% Authentic</span>
           </div>
-          <div className="flex items-center space-x-3 p-3 bg-primary-pink-50 rounded-lg">
-            <div className="w-8 h-8 bg-primary-pink-200 rounded-full flex items-center justify-center">
-              <span className="text-primary-pink-700 text-sm">🏺</span>
+          <div className="flex items-center space-x-3 p-3 bg-rich-beige/5 rounded-lg">
+            <div className="w-8 h-8 bg-rich-beige/20 rounded-full flex items-center justify-center">
+              <span className="text-rich-beige text-sm">🏺</span>
             </div>
             <span className="text-gray-800 font-medium">Handcrafted</span>
           </div>
-          <div className="flex items-center space-x-3 p-3 bg-primary-pink-50 rounded-lg">
-            <div className="w-8 h-8 bg-primary-pink-200 rounded-full flex items-center justify-center">
-              <span className="text-primary-pink-700 text-sm">🧵</span>
+          <div className="flex items-center space-x-3 p-3 bg-rich-beige/5 rounded-lg">
+            <div className="w-8 h-8 bg-rich-beige/20 rounded-full flex items-center justify-center">
+              <span className="text-rich-beige text-sm">🧵</span>
             </div>
             <span className="text-gray-800 font-medium">
               {product.fabric || "Pure Silk"}
             </span>
           </div>
-          <div className="flex items-center space-x-3 p-3 bg-primary-pink-50 rounded-lg">
-            <div className="w-8 h-8 bg-primary-pink-200 rounded-full flex items-center justify-center">
-              <span className="text-primary-pink-700 text-sm">🎨</span>
+          <div className="flex items-center space-x-3 p-3 bg-rich-beige/5 rounded-lg">
+            <div className="w-8 h-8 bg-rich-beige/20 rounded-full flex items-center justify-center">
+              <span className="text-rich-beige text-sm">🎨</span>
             </div>
             <span className="text-gray-800 font-medium">
               {product.color || "Traditional Colors"}
@@ -143,16 +179,16 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       <div className="flex items-center space-x-2">
         <div
           className={`w-3 h-3 rounded-full ${
-            product.in_stock ? "bg-green-500" : "bg-red-500"
+            product.stockCount > 0 ? "bg-green-500" : "bg-red-500"
           }`}
         ></div>
         <span
           className={`font-medium ${
-            product.in_stock ? "text-green-700" : "text-red-700"
+            product.stockCount > 0 ? "text-green-700" : "text-red-700"
           }`}
         >
-          {product.in_stock
-            ? `In Stock (${product.stock_count || 0} available)`
+          {product.stockCount > 0
+            ? `In Stock (${product.stockCount} available)`
             : "Out of Stock"}
         </span>
       </div>
@@ -172,7 +208,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         <Button
           variant="outline"
           size="lg"
-          className="border-primary-pink-200 hover:bg-primary-pink-50"
+          className="border-rich-beige/20 hover:bg-rich-beige/5"
           onClick={() => setIsLiked(!isLiked)}
         >
           <Heart
@@ -185,7 +221,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         <Button
           variant="outline"
           size="lg"
-          className="border-primary-pink-200 hover:bg-primary-pink-50"
+          className="border-rich-beige/20 hover:bg-rich-beige/5"
         >
           <Share2 size={20} className="mr-2" />
           Share
@@ -193,12 +229,12 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       </div>
 
       {/* Additional Info */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-primary-pink-100">
-        <div className="text-center p-4 bg-primary-pink-50 rounded-xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-rich-beige/10">
+        <div className="text-center p-4 bg-rich-beige/5 rounded-xl">
           <p className="text-sm font-medium text-gray-900">Free Shipping</p>
           <p className="text-xs text-gray-700">On orders above ₹5,000</p>
         </div>
-        <div className="text-center p-4 bg-primary-pink-50 rounded-xl">
+        <div className="text-center p-4 bg-rich-beige/5 rounded-xl">
           <p className="text-sm font-medium text-gray-900">Easy Returns</p>
           <p className="text-xs text-gray-700">7-day return policy</p>
         </div>

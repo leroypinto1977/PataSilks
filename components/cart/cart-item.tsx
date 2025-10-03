@@ -31,7 +31,7 @@ export function CartItem({ item }: CartItemProps) {
     <div className="bg-white rounded-2xl shadow-lg p-6">
       <div className="flex items-center space-x-4">
         {/* Product Image */}
-        <div className="w-20 h-20 rounded-xl overflow-hidden bg-cream-100 flex-shrink-0">
+        <div className="w-20 h-20 rounded-xl overflow-hidden bg-rich-beige/10 flex-shrink-0">
           <Image
             src={item.image}
             alt={item.name}
@@ -43,10 +43,10 @@ export function CartItem({ item }: CartItemProps) {
 
         {/* Product Details */}
         <div className="flex-1 min-w-0">
-          <h3 className="font-serif font-bold text-brown-900 truncate">
+          <h3 className="font-serif font-bold text-gray-900 truncate">
             {item.name}
           </h3>
-          <p className="text-amber-600 font-bold">{formatPrice(item.price)}</p>
+          <p className="text-rich-beige font-bold">{formatPrice(item.price)}</p>
         </div>
 
         {/* Quantity Controls */}
@@ -54,18 +54,18 @@ export function CartItem({ item }: CartItemProps) {
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 border-amber-200"
+            className="h-8 w-8 border-rich-beige/20"
             onClick={() => updateQuantity(item.id, item.quantity - 1)}
           >
             <Minus size={14} />
           </Button>
-          <span className="w-8 text-center font-medium text-brown-900">
+          <span className="w-8 text-center font-medium text-gray-900">
             {item.quantity}
           </span>
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 border-amber-200"
+            className="h-8 w-8 border-rich-beige/20"
             onClick={() => updateQuantity(item.id, item.quantity + 1)}
           >
             <Plus size={14} />
@@ -74,7 +74,7 @@ export function CartItem({ item }: CartItemProps) {
 
         {/* Total Price */}
         <div className="text-right">
-          <p className="font-bold text-brown-900">
+          <p className="font-bold text-gray-900">
             {formatPrice(item.price * item.quantity)}
           </p>
         </div>

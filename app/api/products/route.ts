@@ -16,7 +16,7 @@ export async function GET() {
       `
       )
       .eq("active", true)
-      .order("createdAt", { ascending: false });
+      .order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error fetching products:", error);
@@ -38,7 +38,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const cookieStore = cookies();
-  
+
   const supabaseAuth = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
           cookieStore.set({ name, value, ...options });
         },
         remove(name: string, options: CookieOptions) {
-          cookieStore.set({ name, value: '', ...options });
+          cookieStore.set({ name, value: "", ...options });
         },
       },
     }

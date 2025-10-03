@@ -16,12 +16,11 @@ export function NewsletterSection() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-primary-pink-100 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-premium-beige to-warm-beige relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary-pink-100/30 to-primary-pink-200/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-blush/20 to-primary-pink-300/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-gradient-to-r from-primary-pink-200/20 to-blush/20 rounded-full blur-2xl" />
+        <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-rich-beige/10 to-premium-beige/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-rich-beige/10 to-premium-beige/20 rounded-full blur-3xl" />
       </div>
 
       <motion.div
@@ -45,25 +44,21 @@ export function NewsletterSection() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur rounded-full px-6 py-3 shadow-lg mb-6"
             >
-              <Mail className="text-primary-pink-600" size={20} />
-              <span className="text-primary-pink-700 font-semibold">
+              <Mail className="text-rich-beige" size={20} />
+              <span className="text-rich-beige font-semibold">
                 Stay Connected
               </span>
             </motion.div>
 
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Join Our Exclusive
-              <span className="block bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 bg-clip-text text-transparent">
-                Silk Circle
-              </span>
+              <span className="block text-rich-beige">Silk Circle</span>
             </h2>
 
             <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
               Be the first to discover new collections, exclusive designs, and
               special offers. Plus, get{" "}
-              <span className="text-primary-pink-600 font-semibold">
-                10% off
-              </span>{" "}
+              <span className="text-rich-beige font-semibold">10% off</span>{" "}
               your first purchase!
             </p>
           </motion.div>
@@ -99,7 +94,7 @@ export function NewsletterSection() {
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-pink-500 to-primary-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-rich-beige rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <benefit.icon size={24} className="text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -143,13 +138,13 @@ export function NewsletterSection() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
                     required
-                    className="flex-1 px-6 py-4 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-primary-pink-400 focus:ring-2 focus:ring-primary-pink-100 transition-all duration-200"
+                    className="flex-1 px-6 py-4 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-rich-beige focus:ring-2 focus:ring-rich-beige/20 transition-all duration-200"
                   />
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     type="submit"
-                    className="px-8 py-4 bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                    className="px-8 py-4 bg-rich-beige text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                   >
                     Subscribe
                   </motion.button>
@@ -174,11 +169,11 @@ export function NewsletterSection() {
               <span className="text-sm">5000+ Happy Customers</span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-primary-pink-400 rounded-full" />
+              <div className="w-2 h-2 bg-rich-beige rounded-full" />
               <span className="text-sm">Weekly Style Updates</span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-primary-pink-500 rounded-full" />
+              <div className="w-2 h-2 bg-rich-beige rounded-full" />
               <span className="text-sm">No Spam, Ever</span>
             </div>
           </motion.div>

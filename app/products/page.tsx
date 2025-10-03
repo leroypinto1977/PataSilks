@@ -128,16 +128,16 @@ export default async function ProductsPage({
   const pageDescription = getPageDescription(searchParams);
 
   return (
-    <div className="min-h-screen bg-primary-pink-50">
+    <div className="bg-premium-beige">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             {pageTitle}
           </h1>
           <p className="text-gray-700 text-lg max-w-3xl">{pageDescription}</p>
           {searchParams.category && (
-            <div className="mt-4 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-primary-pink-100 to-blush text-primary-pink-700 border border-primary-pink-200">
+            <div className="mt-4 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-rich-beige/10 to-rich-beige/20 text-rich-beige border border-rich-beige/30">
               {searchParams.category.charAt(0).toUpperCase() +
                 searchParams.category.slice(1)}{" "}
               Collection
@@ -148,7 +148,7 @@ export default async function ProductsPage({
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-20">
+            <div className="sticky top-24">
               <Suspense fallback={<Skeleton className="h-96 w-full" />}>
                 <ProductFilters
                   categories={categories}

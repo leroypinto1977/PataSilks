@@ -31,12 +31,12 @@ export function WhyChooseUsSection() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-pink-50 to-primary-pink-100">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left side - Features */}
           <div>
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Why Choose Us
             </h2>
             <p className="text-lg text-gray-700 mb-12 leading-relaxed">
@@ -48,13 +48,13 @@ export function WhyChooseUsSection() {
               {features.map((feature, index) => (
                 <Card
                   key={index}
-                  className="border-0 shadow-sm hover:shadow-md transition-shadow duration-300 bg-white/80 backdrop-blur-sm"
+                  className="border border-rich-beige/20 shadow-sm hover:shadow-lg transition-all duration-300 bg-white hover:bg-premium-beige/5"
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-gradient-to-br from-primary-pink-100 to-blush rounded-lg flex items-center justify-center">
-                          <feature.icon className="w-6 h-6 text-primary-pink-600" />
+                        <div className="w-12 h-12 bg-rich-beige/10 rounded-lg flex items-center justify-center">
+                          <feature.icon className="w-6 h-6 text-rich-beige" />
                         </div>
                       </div>
                       <div>
@@ -84,24 +84,24 @@ export function WhyChooseUsSection() {
                 priority
               />
               {/* Decorative dots pattern */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 opacity-20">
+              <div className="absolute -top-4 -left-4 w-20 h-20 opacity-10">
                 <div className="grid grid-cols-5 gap-2">
                   {Array.from({ length: 25 }).map((_, i) => (
                     <div
                       key={i}
-                      className="w-2 h-2 bg-primary-pink-400 rounded-full"
+                      className="w-2 h-2 bg-rich-beige rounded-full"
                     />
                   ))}
                 </div>
               </div>
 
               {/* Decorative dots pattern bottom right */}
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 opacity-20">
+              <div className="absolute -bottom-4 -right-4 w-20 h-20 opacity-10">
                 <div className="grid grid-cols-5 gap-2">
                   {Array.from({ length: 25 }).map((_, i) => (
                     <div
                       key={i}
-                      className="w-2 h-2 bg-rose-gold rounded-full"
+                      className="w-2 h-2 bg-rich-beige rounded-full"
                     />
                   ))}
                 </div>

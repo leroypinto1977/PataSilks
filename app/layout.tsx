@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Crimson_Text } from "next/font/google";
 import AuthProviderWrapper from "@/components/auth-provider";
+import { CartProvider } from "@/lib/cart-context";
+import { WishlistProvider } from "@/lib/wishlist-context";
 import { ConditionalLayout } from "@/components/layout/conditional-layout";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -45,10 +47,14 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${inter.variable} ${crimsonText.variable}`}
     >
-      <body className="min-h-screen bg-primary-pink-50 text-gray-900 font-sans">
+      <body className="min-h-screen bg-white text-gray-900 font-sans">
         <AuthProviderWrapper>
-          <ConditionalLayout>{children}</ConditionalLayout>
-          <Toaster position="bottom-right" />
+          <CartProvider>
+            <WishlistProvider>
+              <ConditionalLayout>{children}</ConditionalLayout>
+              <Toaster position="bottom-right" />
+            </WishlistProvider>
+          </CartProvider>
         </AuthProviderWrapper>
       </body>
     </html>

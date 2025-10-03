@@ -61,14 +61,14 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-rose-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-premium-beige to-warm-beige px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="text-center mb-4">
-            <h1 className="text-2xl font-serif font-bold text-brown-900">
+            <h1 className="text-2xl font-serif font-bold text-gray-900">
               Patta Silks
             </h1>
-            <p className="text-brown-600">Premium Indian Textiles</p>
+            <p className="text-gray-600">Premium Indian Textiles</p>
           </div>
           <CardTitle className="text-2xl font-bold text-center">
             {isSignUp ? "Create Account" : "Welcome Back"}
@@ -97,7 +97,7 @@ export default function SignInPage() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required={isSignUp}
-                  className="border-pink-200 focus:border-pink-400"
+                  className="border-rich-beige/20 focus:border-rich-beige"
                 />
               </div>
             )}
@@ -111,7 +111,7 @@ export default function SignInPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="border-pink-200 focus:border-pink-400"
+                className="border-rich-beige/20 focus:border-rich-beige"
               />
             </div>
 
@@ -125,12 +125,12 @@ export default function SignInPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="border-pink-200 focus:border-pink-400 pr-10"
+                  className="border-rich-beige/20 focus:border-rich-beige pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-brown-500 hover:text-brown-700"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -139,7 +139,7 @@ export default function SignInPage() {
 
             <Button
               type="submit"
-              className="w-full luxury-button"
+              className="w-full btn-primary"
               disabled={isLoading}
             >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -149,7 +149,7 @@ export default function SignInPage() {
         </form>
 
         <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-sm text-brown-600">
+          <div className="text-center text-sm text-gray-600">
             {isSignUp ? "Already have an account?" : "Don't have an account?"}
             <button
               type="button"
@@ -160,7 +160,7 @@ export default function SignInPage() {
                 setPassword("");
                 setFullName("");
               }}
-              className="ml-1 text-pink-600 hover:text-pink-700 font-medium"
+              className="ml-1 text-rich-beige hover:text-rich-beige font-medium"
             >
               {isSignUp ? "Sign in" : "Sign up"}
             </button>
@@ -169,18 +169,18 @@ export default function SignInPage() {
           <div className="text-center">
             <Link
               href="/"
-              className="text-sm text-brown-600 hover:text-brown-800"
+              className="text-sm text-gray-600 hover:text-gray-800"
             >
               ← Back to home
             </Link>
           </div>
 
           {/* Demo credentials info */}
-          <div className="mt-4 p-3 bg-pink-50 rounded-lg border border-pink-200">
-            <p className="text-xs text-pink-800 font-medium mb-1">
+          <div className="mt-4 p-3 bg-rich-beige/5 rounded-lg border border-rich-beige/20">
+            <p className="text-xs text-rich-beige font-medium mb-1">
               Demo Access:
             </p>
-            <p className="text-xs text-pink-700">
+            <p className="text-xs text-rich-beige">
               Create an account or contact admin for access
             </p>
           </div>

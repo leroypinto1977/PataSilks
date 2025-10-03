@@ -1,11 +1,10 @@
 "use client";
 
-import { useCartStore } from "@/lib/store";
+import { useCart as useCartContext } from "@/lib/cart-context";
 import { useMounted } from "./use-mounted";
 
 export function useCart() {
   const mounted = useMounted();
-  const store = useCartStore();
 
   // Return safe defaults during SSR
   if (!mounted) {
@@ -20,5 +19,17 @@ export function useCart() {
     };
   }
 
-  return store;
+  // Use the context hook from cart-context
+  const context = useCartContext();
+  const { state, addItem, removeItem, updateQuantity, clearCart } = context;
+
+  return {
+    items: state.items,
+    addItem,
+    removeItem,
+    updateQuantity,
+    clearCart,
+    getTotalItems: () => state.itemCount,
+    getTotalPrice: () => state.total,
+  };
 }

@@ -2,15 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Star, Sparkles, Crown, Gift } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false);
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 300], [0, 100]);
-  const y2 = useTransform(scrollY, [0, 300], [0, -50]);
 
   useEffect(() => {
     setMounted(true);
@@ -19,66 +17,19 @@ export function HeroSection() {
   if (!mounted) return null;
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-primary-pink-50 via-blush to-primary-pink-200">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <motion.div
-          style={{ y: y1 }}
-          className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary-pink-300/20 to-blush/20 rounded-full blur-xl"
+    <section className="relative min-h-screen bg-gradient-to-br from-white via-premium-beige to-warm-beige">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
         />
-        <motion.div
-          style={{ y: y2 }}
-          className="absolute top-40 right-20 w-48 h-48 bg-gradient-to-r from-rose-gold/20 to-primary-pink-300/20 rounded-full blur-xl"
-        />
-        <motion.div
-          style={{ y: y1 }}
-          className="absolute bottom-40 left-1/4 w-24 h-24 bg-gradient-to-r from-blush/20 to-rose-gold/20 rounded-full blur-xl"
-        />
-      </div>
-
-      {/* Floating Decorative Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: [0.3, 0.7, 0.3],
-              scale: [1, 1.2, 1],
-              y: [-20, 20, -20],
-            }}
-            transition={{
-              duration: 3 + i * 0.5,
-              repeat: Infinity,
-              delay: i * 0.3,
-            }}
-            className={`absolute ${
-              i % 4 === 0
-                ? "text-primary-pink-400"
-                : i % 4 === 1
-                ? "text-primary-pink-600"
-                : i % 4 === 2
-                ? "text-rose-gold"
-                : "text-primary-pink-300"
-            }`}
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-          >
-            {i % 3 === 0 ? (
-              <Sparkles size={20} />
-            ) : i % 3 === 1 ? (
-              <Star size={16} />
-            ) : (
-              <Crown size={18} />
-            )}
-          </motion.div>
-        ))}
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -86,113 +37,91 @@ export function HeroSection() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="space-y-6"
-            >
+            <div className="space-y-6">
               {/* Premium Badge */}
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-pink-100 to-blush border border-primary-pink-200 rounded-full px-6 py-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="inline-flex items-center space-x-2 bg-rich-beige/10 border border-rich-beige/20 rounded-full px-6 py-3"
               >
-                <Crown className="text-primary-pink-600" size={20} />
-                <span className="text-primary-pink-700 font-semibold">
+                <Sparkles className="text-rich-beige" size={20} />
+                <span className="text-rich-beige font-semibold">
                   Premium Heritage Collection
                 </span>
-                <Sparkles className="text-primary-pink-600" size={16} />
               </motion.div>
 
-              {/* Main Heading with Gradient Text */}
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-serif font-bold leading-tight">
-                <span className="bg-gradient-to-r from-gray-900 via-primary-pink-700 to-primary-pink-800 bg-clip-text text-transparent">
-                  Timeless
-                </span>
+              {/* Main Heading */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight"
+              >
+                <span className="text-gray-900">Timeless</span>
                 <br />
-                <span className="bg-gradient-to-r from-primary-pink-600 via-primary-pink-700 to-rose-gold bg-clip-text text-transparent">
-                  Elegance
-                </span>
+                <span className="text-rich-beige">Elegance</span>
                 <br />
-                <span className="text-gray-900">in Every Thread</span>
-              </h1>
+                <span className="text-gray-800">in Every Thread</span>
+              </motion.h1>
 
-              {/* Description with Enhanced Typography */}
-              <p className="text-xl text-gray-700 leading-relaxed max-w-lg">
-                Discover our{" "}
-                <span className="font-semibold text-primary-pink-700">
-                  exquisite collection
-                </span>{" "}
-                of handwoven silk sarees, lehengas, and traditional textiles
-                crafted by
-                <span className="font-semibold text-primary-pink-700">
-                  {" "}
-                  master artisans
-                </span>{" "}
+              {/* Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="text-xl text-gray-700 leading-relaxed max-w-lg"
+              >
+                Discover our exquisite collection of handwoven silk sarees,
+                lehengas, and traditional textiles crafted by master artisans
                 with centuries of heritage.
-              </p>
-            </motion.div>
+              </motion.p>
+            </div>
 
-            {/* Action Buttons with Hover Effects */}
+            {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
               className="flex flex-col sm:flex-row gap-4"
             >
               <Link href="/products">
-                <motion.div
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  className="bg-rich-beige text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center"
                 >
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 hover:from-primary-pink-700 hover:to-primary-pink-800 text-white shadow-lg"
-                  >
-                    <Gift className="mr-2" size={20} />
-                    Explore Collection
-                    <ArrowRight size={20} className="ml-2" />
-                  </Button>
-                </motion.div>
+                  Explore Collection
+                  <ArrowRight size={20} className="ml-2" />
+                </motion.button>
               </Link>
               <Link href="/products?newArrivals=true">
-                <motion.div
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  className="border-2 border-rich-beige text-rich-beige px-8 py-4 rounded-full font-semibold hover:bg-rich-beige hover:text-white transition-all duration-300 flex items-center"
                 >
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-2 border-primary-pink-300 text-primary-pink-700 hover:bg-gradient-to-r hover:from-primary-pink-50 hover:to-blush"
-                  >
-                    <Sparkles className="mr-2" size={20} />
-                    New Arrivals
-                  </Button>
-                </motion.div>
+                  <Sparkles className="mr-2" size={20} />
+                  New Arrivals
+                </motion.button>
               </Link>
             </motion.div>
 
-            {/* Social Proof with Animation */}
+            {/* Social Proof */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
               className="flex items-center space-x-8 pt-6"
             >
               <div className="flex items-center space-x-2">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
-                    <motion.div
+                    <Star
                       key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.8 + i * 0.1 }}
-                    >
-                      <Star
-                        size={24}
-                        className="fill-primary-pink-400 text-primary-pink-400"
-                      />
-                    </motion.div>
+                      size={20}
+                      className="fill-rich-beige text-rich-beige"
+                    />
                   ))}
                 </div>
                 <span className="text-gray-800 font-bold text-lg ml-3">
@@ -200,7 +129,7 @@ export function HeroSection() {
                 </span>
               </div>
               <div className="text-gray-700">
-                <span className="font-bold text-2xl bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 bg-clip-text text-transparent">
+                <span className="font-bold text-2xl text-rich-beige">
                   15,000+
                 </span>
                 <br />
@@ -216,31 +145,30 @@ export function HeroSection() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="relative"
           >
-            {/* Main Image with Enhanced Effects */}
+            {/* Main Image */}
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-primary-pink-100 via-blush to-primary-pink-300 shadow-2xl"
+              className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-warm-beige to-premium-beige shadow-2xl"
             >
-              <img
+              <Image
                 src="https://images.pexels.com/photos/8839898/pexels-photo-8839898.jpeg"
                 alt="Luxury silk saree collection"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
-              {/* Overlay Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
             </motion.div>
 
-            {/* Floating Cards with Enhanced Design */}
+            {/* Floating Cards */}
             <motion.div
-              initial={{ opacity: 0, y: 20, rotate: -5 }}
-              animate={{ opacity: 1, y: 0, rotate: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-primary-pink-100"
+              whileHover={{ scale: 1.05 }}
+              className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-rich-beige/20"
             >
               <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                <div className="w-3 h-3 bg-green-500 rounded-full" />
                 <div>
                   <p className="text-sm font-bold text-gray-900">
                     Premium Quality
@@ -251,14 +179,14 @@ export function HeroSection() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20, rotate: 5 }}
-              animate={{ opacity: 1, y: 0, rotate: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
-              whileHover={{ scale: 1.05, rotate: -2 }}
-              className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl backdrop-blur-sm border border-primary-pink-100"
+              whileHover={{ scale: 1.05 }}
+              className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl border border-rich-beige/20"
             >
               <div className="flex items-center space-x-3">
-                <Crown className="text-primary-pink-600" size={24} />
+                <Sparkles className="text-rich-beige" size={24} />
                 <div>
                   <p className="text-sm font-bold text-gray-900">
                     Heritage Craft
@@ -267,29 +195,8 @@ export function HeroSection() {
                 </div>
               </div>
             </motion.div>
-
-            {/* Additional Floating Elements */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-              whileHover={{ scale: 1.1 }}
-              className="absolute top-1/4 -left-4 bg-gradient-to-r from-primary-pink-500 to-primary-pink-700 text-white rounded-full p-4 shadow-lg"
-            >
-              <Sparkles size={20} />
-            </motion.div>
           </motion.div>
         </div>
-      </div>
-
-      {/* Bottom Wave Decoration */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" className="w-full h-20 text-white">
-          <path
-            fill="currentColor"
-            d="M0,64L120,69.3C240,75,480,85,720,80C960,75,1200,53,1320,42.7L1440,32L1440,120L1320,120C1200,120,960,120,720,120C480,120,240,120,120,120L0,120Z"
-          ></path>
-        </svg>
       </div>
     </section>
   );

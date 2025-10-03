@@ -30,25 +30,25 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-cream-50 flex items-center justify-center">
+      <div className="bg-white flex items-center justify-center py-20">
         <div className="text-center">
-          <h1 className="text-2xl font-serif font-bold text-brown-900 mb-4">
+          <h1 className="text-2xl font-serif font-bold text-gray-900 mb-4">
             No items in cart
           </h1>
-          <p className="text-brown-700">Add some products to checkout</p>
+          <p className="text-gray-700">Add some products to checkout</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl lg:text-4xl font-serif font-bold text-brown-900 mb-2">
+          <h1 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mb-2">
             Checkout
           </h1>
-          <p className="text-brown-700">Complete your order</p>
+          <p className="text-gray-700">Complete your order</p>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -57,8 +57,8 @@ export default function CheckoutPage() {
             <div className="space-y-8">
               {/* Shipping Information */}
               <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h2 className="text-xl font-serif font-bold text-brown-900 mb-6 flex items-center">
-                  <Truck size={20} className="mr-2 text-amber-600" />
+                <h2 className="text-xl font-serif font-bold text-gray-900 mb-6 flex items-center">
+                  <Truck size={20} className="mr-2 text-rich-beige" />
                   Shipping Information
                 </h2>
 
@@ -68,7 +68,7 @@ export default function CheckoutPage() {
                     <Input
                       id="firstName"
                       required
-                      className="border-amber-200"
+                      className="border-rich-beige/20"
                     />
                   </div>
                   <div>
@@ -76,7 +76,7 @@ export default function CheckoutPage() {
                     <Input
                       id="lastName"
                       required
-                      className="border-amber-200"
+                      className="border-rich-beige/20"
                     />
                   </div>
                   <div className="sm:col-span-2">
@@ -85,24 +85,40 @@ export default function CheckoutPage() {
                       id="email"
                       type="email"
                       required
-                      className="border-amber-200"
+                      className="border-rich-beige/20"
                     />
                   </div>
                   <div className="sm:col-span-2">
                     <Label htmlFor="address">Address</Label>
-                    <Input id="address" required className="border-amber-200" />
+                    <Input
+                      id="address"
+                      required
+                      className="border-rich-beige/20"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="city">City</Label>
-                    <Input id="city" required className="border-amber-200" />
+                    <Input
+                      id="city"
+                      required
+                      className="border-rich-beige/20"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="pincode">PIN Code</Label>
-                    <Input id="pincode" required className="border-amber-200" />
+                    <Input
+                      id="pincode"
+                      required
+                      className="border-rich-beige/20"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="state">State</Label>
-                    <Input id="state" required className="border-amber-200" />
+                    <Input
+                      id="state"
+                      required
+                      className="border-rich-beige/20"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="phone">Phone</Label>
@@ -110,7 +126,7 @@ export default function CheckoutPage() {
                       id="phone"
                       type="tel"
                       required
-                      className="border-amber-200"
+                      className="border-rich-beige/20"
                     />
                   </div>
                 </div>
@@ -118,8 +134,8 @@ export default function CheckoutPage() {
 
               {/* Payment Information */}
               <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h2 className="text-xl font-serif font-bold text-brown-900 mb-6 flex items-center">
-                  <CreditCard size={20} className="mr-2 text-amber-600" />
+                <h2 className="text-xl font-serif font-bold text-gray-900 mb-6 flex items-center">
+                  <CreditCard size={20} className="mr-2 text-rich-beige" />
                   Payment Information
                 </h2>
 
@@ -130,7 +146,7 @@ export default function CheckoutPage() {
                       id="cardNumber"
                       placeholder="1234 5678 9012 3456"
                       required
-                      className="border-amber-200"
+                      className="border-rich-beige/20"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -140,7 +156,7 @@ export default function CheckoutPage() {
                         id="expiry"
                         placeholder="MM/YY"
                         required
-                        className="border-amber-200"
+                        className="border-rich-beige/20"
                       />
                     </div>
                     <div>
@@ -149,7 +165,7 @@ export default function CheckoutPage() {
                         id="cvv"
                         placeholder="123"
                         required
-                        className="border-amber-200"
+                        className="border-rich-beige/20"
                       />
                     </div>
                   </div>
@@ -158,7 +174,7 @@ export default function CheckoutPage() {
                     <Input
                       id="cardName"
                       required
-                      className="border-amber-200"
+                      className="border-rich-beige/20"
                     />
                   </div>
                 </div>
@@ -166,12 +182,12 @@ export default function CheckoutPage() {
 
               {/* Special Instructions */}
               <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h2 className="text-xl font-serif font-bold text-brown-900 mb-4">
+                <h2 className="text-xl font-serif font-bold text-gray-900 mb-4">
                   Special Instructions
                 </h2>
                 <Textarea
                   placeholder="Any special delivery instructions..."
-                  className="border-amber-200"
+                  className="border-rich-beige/20"
                 />
               </div>
             </div>
@@ -179,7 +195,7 @@ export default function CheckoutPage() {
             {/* Order Summary */}
             <div>
               <div className="bg-white rounded-2xl shadow-lg p-6 space-y-6 sticky top-8">
-                <h2 className="text-xl font-serif font-bold text-brown-900">
+                <h2 className="text-xl font-serif font-bold text-gray-900">
                   Order Summary
                 </h2>
 
@@ -188,14 +204,14 @@ export default function CheckoutPage() {
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className="flex items-center space-x-3 p-3 bg-cream-50 rounded-xl"
+                      className="flex items-center space-x-3 p-3 bg-rich-beige/5 rounded-xl"
                     >
-                      <div className="w-12 h-12 bg-amber-100 rounded-lg"></div>
+                      <div className="w-12 h-12 bg-rich-beige/10 rounded-lg"></div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-medium text-brown-900 text-sm truncate">
+                        <p className="font-medium text-gray-900 text-sm truncate">
                           {item.name}
                         </p>
-                        <p className="text-amber-600 text-sm">
+                        <p className="text-rich-beige text-sm">
                           Qty: {item.quantity} × {formatPrice(item.price)}
                         </p>
                       </div>
@@ -204,21 +220,21 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Pricing */}
-                <div className="space-y-3 border-t border-amber-100 pt-4">
-                  <div className="flex justify-between text-brown-700">
+                <div className="space-y-3 border-t border-rich-beige/20 pt-4">
+                  <div className="flex justify-between text-gray-700">
                     <span>Subtotal</span>
                     <span>{formatPrice(getTotalPrice())}</span>
                   </div>
-                  <div className="flex justify-between text-brown-700">
+                  <div className="flex justify-between text-gray-700">
                     <span>Shipping</span>
                     <span className="text-green-600">Free</span>
                   </div>
-                  <div className="flex justify-between text-brown-700">
+                  <div className="flex justify-between text-gray-700">
                     <span>GST (18%)</span>
                     <span>{formatPrice(getTotalPrice() * 0.18)}</span>
                   </div>
-                  <div className="border-t border-amber-100 pt-3">
-                    <div className="flex justify-between text-lg font-bold text-brown-900">
+                  <div className="border-t border-rich-beige/20 pt-3">
+                    <div className="flex justify-between text-lg font-bold text-gray-900">
                       <span>Total</span>
                       <span>{formatPrice(getTotalPrice() * 1.18)}</span>
                     </div>
@@ -226,17 +242,17 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Security Info */}
-                <div className="flex items-center space-x-2 text-sm text-brown-600 bg-cream-50 p-3 rounded-xl">
+                <div className="flex items-center space-x-2 text-sm text-gray-600 bg-rich-beige/5 p-3 rounded-xl">
                   <Shield size={16} className="text-green-600" />
                   <span>Your payment information is secure and encrypted</span>
                 </div>
 
                 {/* Place Order Button */}
-                <Button type="submit" className="w-full luxury-button">
+                <Button type="submit" className="w-full btn-primary">
                   Place Order - {formatPrice(getTotalPrice() * 1.18)}
                 </Button>
 
-                <div className="text-center text-xs text-brown-600">
+                <div className="text-center text-xs text-gray-600">
                   By placing this order, you agree to our Terms of Service and
                   Privacy Policy
                 </div>

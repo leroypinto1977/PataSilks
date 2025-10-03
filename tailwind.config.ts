@@ -10,8 +10,18 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["var(--font-playfair)", "Playfair Display", "Georgia", "serif"],
         sans: [
+          "var(--font-inter)",
+          "Inter",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif",
+        ],
+        display: [
           "var(--font-inter)",
           "Inter",
           "-apple-system",
@@ -19,25 +29,32 @@ const config: Config = {
           "Segoe UI",
           "sans-serif",
         ],
-        accent: ["var(--font-crimson)", "Crimson Text", "Georgia", "serif"],
+        body: [
+          "var(--font-inter)",
+          "Inter",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "sans-serif",
+        ],
       },
       colors: {
-        // Customer Website - Light Pink & White Theme
+        // Customer Website - Premium Beige Theme
         "primary-pink": {
-          50: "#FDF5F6", // Ultra light pink
-          100: "#F8E8E9", // Very light pink background
-          200: "#F5D0D3", // Medium pink for accents
-          300: "#E8B4B8", // Darker pink for hover states
-          400: "#D4949A", // Deep pink for emphasis
-          500: "#C07982", // Main brand pink
-          600: "#A85D68", // Darker brand pink
-          700: "#8B4A54", // Deep brand pink
-          800: "#6E3A42", // Very deep pink
-          900: "#4A252A", // Darkest pink
+          50: "#FDFCFA", // Ultra light beige
+          100: "#F9F7F4", // Very light beige background
+          200: "#F2EDE6", // Medium beige for accents
+          300: "#E8DCCF", // Darker beige for hover states
+          400: "#D4C4B0", // Deep beige for emphasis
+          500: "#C4B299", // Main brand beige
+          600: "#B8A085", // Darker brand beige
+          700: "#A68F73", // Deep brand beige
+          800: "#8B7A61", // Very deep beige
+          900: "#6B5D4A", // Darkest beige
         },
-        "rose-gold": "#E8B4B8",
-        blush: "#F5C2C7",
-        champagne: "#F7E7CE",
+        "premium-beige": "#EDE6D9", // Main premium color
+        "warm-beige": "#F5F0E8", // Light warm beige
+        "rich-beige": "#D4C4B0", // Rich beige accent
 
         // Admin Panel - Dark Monochromatic Theme
         admin: {
