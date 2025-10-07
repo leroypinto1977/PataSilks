@@ -188,7 +188,7 @@ export default function ProductsPage() {
             </p>
           </div>
           <Link href="/admin/products/new">
-            <Button className="bg-primary-pink-600 hover:bg-primary-pink-700">
+            <Button className="bg-primary-brown-600 hover:bg-primary-brown-700">
               <Plus className="h-4 w-4 mr-2" />
               Add New Product
             </Button>
@@ -256,7 +256,9 @@ export default function ProductsPage() {
         <Card className="bg-card border-border">
           <CardContent className="p-4">
             <div className="text-center">
-              <p className="text-2xl font-bold text-foreground">{products.length}</p>
+              <p className="text-2xl font-bold text-foreground">
+                {products.length}
+              </p>
               <p className="text-sm text-muted-foreground">Total Products</p>
             </div>
           </CardContent>
@@ -276,7 +278,7 @@ export default function ProductsPage() {
         <Card className="bg-card border-border">
           <CardContent className="p-4">
             <div className="text-center">
-              <p className="text-2xl font-bold text-primary-pink-600">
+              <p className="text-2xl font-bold text-primary-brown-600">
                 {products.filter((p) => p.featured).length}
               </p>
               <p className="text-sm text-muted-foreground">Featured</p>
@@ -312,7 +314,7 @@ export default function ProductsPage() {
           <CardContent>
             {loading ? (
               <div className="text-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-pink-600 mx-auto mb-4"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-brown-600 mx-auto mb-4"></div>
                 <p className="text-muted-foreground">Loading products...</p>
               </div>
             ) : filteredProducts.length === 0 ? (
@@ -327,7 +329,7 @@ export default function ProductsPage() {
                     : "Get started by adding your first saree"}
                 </p>
                 <Link href="/admin/products/new">
-                  <Button className="bg-primary-pink-600 hover:bg-primary-pink-700">
+                  <Button className="bg-primary-brown-600 hover:bg-primary-brown-700">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Your First Product
                   </Button>
@@ -352,13 +354,13 @@ export default function ProductsPage() {
                           <div className="flex items-center space-x-2">
                             <h3 className="font-medium">{product.name}</h3>
                             {product.featured && (
-                              <Star className="h-4 w-4 text-primary-pink-600 fill-current" />
+                              <Star className="h-4 w-4 text-primary-brown-600 fill-current" />
                             )}
                           </div>
                           <p className="text-sm text-muted-foreground">
                             {product.categories?.name || "No category"}
                           </p>
-                          <p className="text-sm font-medium text-primary-pink-600">
+                          <p className="text-sm font-medium text-primary-brown-600">
                             {formatPrice(product.price)}
                           </p>
                         </div>

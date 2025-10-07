@@ -125,7 +125,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             <div className="p-6 max-h-[60vh] overflow-y-auto">
               {isLoading ? (
                 <div className="flex items-center justify-center py-12">
-                  <Loader2 className="animate-spin text-rich-beige" size={24} />
+                  <Loader2 className="animate-spin text-rich-brown" size={24} />
                   <span className="ml-2 text-gray-600">Searching...</span>
                 </div>
               ) : hasSearched ? (

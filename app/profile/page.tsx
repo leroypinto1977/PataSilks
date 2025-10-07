@@ -80,7 +80,7 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-premium-beige flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rich-beige"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rich-brown"></div>
       </div>
     );
   }
@@ -127,7 +127,7 @@ export default function ProfilePage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center space-x-2">
-                  <User className="h-5 w-5 text-rich-beige" />
+                  <User className="h-5 w-5 text-rich-brown" />
                   <span>Profile Information</span>
                 </CardTitle>
                 {!isEditing && (
@@ -135,7 +135,7 @@ export default function ProfilePage() {
                     variant="outline"
                     size="sm"
                     onClick={() => setIsEditing(true)}
-                    className="border-rich-beige/20 hover:bg-rich-beige/5"
+                    className="border-rich-brown/20 hover:bg-rich-brown/5"
                   >
                     <Edit3 className="h-4 w-4 mr-2" />
                     Edit
@@ -159,8 +159,8 @@ export default function ProfilePage() {
               )}
 
               {/* User Role */}
-              <div className="flex items-center space-x-2 p-3 bg-rich-beige/10 rounded-lg">
-                <Shield className="h-4 w-4 text-rich-beige" />
+              <div className="flex items-center space-x-2 p-3 bg-rich-brown/10 rounded-lg">
+                <Shield className="h-4 w-4 text-rich-brown" />
                 <span className="text-sm font-medium text-gray-700">
                   Role:{" "}
                   {userProfile?.role === "admin" ? "Administrator" : "Customer"}
@@ -235,7 +235,7 @@ export default function ProfilePage() {
                   <Button
                     onClick={handleSave}
                     disabled={isSaving}
-                    className="bg-rich-beige hover:bg-rich-beige/90 text-white"
+                    className="bg-rich-brown hover:bg-rich-brown/90 text-white"
                   >
                     {isSaving ? (
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
@@ -247,7 +247,7 @@ export default function ProfilePage() {
                   <Button
                     variant="outline"
                     onClick={handleCancel}
-                    className="border-rich-beige/20 hover:bg-rich-beige/5"
+                    className="border-rich-brown/20 hover:bg-rich-brown/5"
                   >
                     <X className="h-4 w-4 mr-2" />
                     Cancel
@@ -268,14 +268,14 @@ export default function ProfilePage() {
                   <Button
                     variant="outline"
                     onClick={() => router.push("/wishlist")}
-                    className="border-rich-beige/20 hover:bg-rich-beige/5"
+                    className="border-rich-brown/20 hover:bg-rich-brown/5"
                   >
                     View Wishlist
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => router.push("/cart")}
-                    className="border-rich-beige/20 hover:bg-rich-beige/5"
+                    className="border-rich-brown/20 hover:bg-rich-brown/5"
                   >
                     View Cart
                   </Button>

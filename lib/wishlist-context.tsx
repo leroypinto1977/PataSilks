@@ -3,14 +3,36 @@
 import React, { createContext, useContext, useReducer, useEffect } from "react";
 import { SanityProductPreview } from "@/types/sanity";
 
+// Extended product type to handle both _id and id
+interface WishlistProduct {
+  _id?: string; // For Sanity products
+  id?: string; // For database products
+  name: string;
+  slug?: { current: string } | string; // Handle both formats
+  description?: string;
+  price: number;
+  images?: any[]; // Flexible image format
+  category?: {
+    _id?: string;
+    id?: string;
+    name: string;
+    slug?: { current: string } | string;
+  };
+  fabric?: string;
+  color?: string;
+  featured?: boolean;
+  newArrival?: boolean;
+  new_arrival?: boolean;
+}
+
 interface WishlistState {
-  items: SanityProductPreview[];
+  items: WishlistProduct[];
   itemCount: number;
 }
 
 interface WishlistContextType {
   state: WishlistState;
-  addItem: (product: SanityProductPreview) => void;
+  addItem: (product: WishlistProduct) => void;
   removeItem: (productId: string) => void;
   isLiked: (productId: string) => boolean;
   clearWishlist: () => void;
@@ -21,10 +43,10 @@ const WishlistContext = createContext<WishlistContextType | undefined>(
 );
 
 type WishlistAction =
-  | { type: "ADD_ITEM"; payload: SanityProductPreview }
+  | { type: "ADD_ITEM"; payload: WishlistProduct }
   | { type: "REMOVE_ITEM"; payload: string }
   | { type: "CLEAR_WISHLIST" }
-  | { type: "LOAD_WISHLIST"; payload: SanityProductPreview[] };
+  | { type: "LOAD_WISHLIST"; payload: WishlistProduct[] };
 
 function wishlistReducer(
   state: WishlistState,
@@ -33,7 +55,8 @@ function wishlistReducer(
   switch (action.type) {
     case "ADD_ITEM":
       const existingItem = state.items.find(
-        (item) => item._id === action.payload._id
+        (item) =>
+          (item._id || item.id) === (action.payload._id || action.payload.id)
       );
       if (existingItem) {
         return state; // Don't add duplicates
@@ -47,7 +70,9 @@ function wishlistReducer(
     case "REMOVE_ITEM":
       return {
         ...state,
-        items: state.items.filter((item) => item._id !== action.payload),
+        items: state.items.filter(
+          (item) => (item._id || item.id) !== action.payload
+        ),
         itemCount: Math.max(0, state.itemCount - 1),
       };
 
@@ -94,7 +119,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("wishlist", JSON.stringify(state.items));
   }, [state.items]);
 
-  const addItem = (product: SanityProductPreview) => {
+  const addItem = (product: WishlistProduct) => {
     dispatch({ type: "ADD_ITEM", payload: product });
   };
 
@@ -103,7 +128,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   };
 
   const isLiked = (productId: string) => {
-    return state.items.some((item) => item._id === productId);
+    return state.items.some((item) => (item._id || item.id) === productId);
   };
 
   const clearWishlist = () => {

@@ -100,10 +100,10 @@ export default function ShippingPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 bg-rich-beige/10 border border-rich-beige/20 rounded-full px-6 py-3 mb-6"
+              className="inline-flex items-center space-x-2 bg-rich-brown/10 border border-rich-brown/20 rounded-full px-6 py-3 mb-6"
             >
-              <Truck className="text-rich-beige" size={20} />
-              <span className="text-rich-beige font-semibold">
+              <Truck className="text-rich-brown" size={20} />
+              <span className="text-rich-brown font-semibold">
                 Shipping Information
               </span>
             </motion.div>
@@ -113,7 +113,7 @@ export default function ShippingPage() {
               className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
             >
               Fast & Secure
-              <span className="text-rich-beige"> Delivery</span>
+              <span className="text-rich-brown"> Delivery</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -147,13 +147,13 @@ export default function ShippingPage() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white rounded-2xl shadow-lg p-6 text-center"
               >
-                <div className="w-16 h-16 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <option.icon className="w-8 h-8 text-rich-beige" />
+                <div className="w-16 h-16 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <option.icon className="w-8 h-8 text-rich-brown" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
                   {option.name}
                 </h3>
-                <p className="text-rich-beige font-semibold mb-2">
+                <p className="text-rich-brown font-semibold mb-2">
                   {option.duration}
                 </p>
                 <p className="text-gray-600 font-semibold mb-3">
@@ -184,8 +184,8 @@ export default function ShippingPage() {
                 transition={{ delay: 0.3 + index * 0.1 }}
                 className="bg-white rounded-2xl shadow-lg p-6"
               >
-                <div className="w-12 h-12 bg-rich-beige/10 rounded-lg flex items-center justify-center mb-4">
-                  <feature.icon className="w-6 h-6 text-rich-beige" />
+                <div className="w-12 h-12 bg-rich-brown/10 rounded-lg flex items-center justify-center mb-4">
+                  <feature.icon className="w-6 h-6 text-rich-brown" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">
                   {feature.title}
@@ -209,8 +209,8 @@ export default function ShippingPage() {
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="w-8 h-8 text-rich-beige" />
+                <div className="w-16 h-16 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-8 h-8 text-rich-brown" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
                   Order Processing
@@ -218,8 +218,8 @@ export default function ShippingPage() {
                 <p className="text-gray-700">1-2 business days</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Package className="w-8 h-8 text-rich-beige" />
+                <div className="w-16 h-16 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Package className="w-8 h-8 text-rich-brown" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
                   Packaging
@@ -227,8 +227,8 @@ export default function ShippingPage() {
                 <p className="text-gray-700">Same day</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Truck className="w-8 h-8 text-rich-beige" />
+                <div className="w-16 h-16 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Truck className="w-8 h-8 text-rich-brown" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
                   Transit
@@ -287,7 +287,7 @@ export default function ShippingPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-rich-beige/5 rounded-2xl p-8"
+          className="bg-rich-brown/5 rounded-2xl p-8"
         >
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Shipping FAQ

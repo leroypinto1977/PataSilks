@@ -32,7 +32,7 @@ export function AdminSidebar() {
     <div className="w-64 bg-white shadow-lg h-screen sticky top-0 border-r border-gray-200">
       <div className="p-6 border-b border-gray-200">
         <Link href="/" className="flex items-center space-x-2">
-          <h1 className="text-xl font-serif font-bold text-primary-pink-600">
+          <h1 className="text-xl font-serif font-bold text-primary-brown-600">
             Patta Silks
           </h1>
         </Link>
@@ -48,7 +48,7 @@ export function AdminSidebar() {
               href={item.href}
               className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                 isActive
-                  ? "bg-primary-pink-50 text-primary-pink-700 border-l-4 border-primary-pink-600"
+                  ? "bg-primary-brown-50 text-primary-brown-700 border-l-4 border-primary-brown-600"
                   : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               }`}
             >

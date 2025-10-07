@@ -1,29 +1,52 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseAdminClient } from "@/lib/supabase-admin";
+import { createSupabaseServerClient } from "@/lib/supabase-server";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const orderId = params.id;
-    const supabaseAdmin = createSupabaseAdminClient();
+    const supabase = createSupabaseServerClient();
 
-    const { data: order, error } = await supabaseAdmin
+    // Check if user is authenticated and is admin
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", session.user.id)
+      .single();
+
+    if (profileError || !profile?.is_admin) {
+      return NextResponse.json(
+        { error: "Admin access required" },
+        { status: 403 }
+      );
+    }
+
+    const { data: order, error } = await supabase
       .from("orders")
       .select(
         `
         *,
-        profiles(id, email, full_name),
-        order_items(
+        order_items (
           id,
           quantity,
           price,
-          products(id, name, images, description)
+          product_id,
+          product_name,
+          product_slug
         )
       `
       )
-      .eq("id", orderId)
+      .eq("id", params.id)
       .single();
 
     if (error) {
@@ -33,79 +56,7 @@ export async function GET(
 
     return NextResponse.json({ order });
   } catch (error) {
-    console.error("Error in order fetch API:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const orderId = params.id;
-    const updates = await request.json();
-
-    // Validate status if provided
-    if (
-      updates.status &&
-      ![
-        "PENDING",
-        "CONFIRMED",
-        "PROCESSING",
-        "SHIPPED",
-        "DELIVERED",
-        "CANCELLED",
-      ].includes(updates.status)
-    ) {
-      return NextResponse.json(
-        { error: "Invalid status provided" },
-        { status: 400 }
-      );
-    }
-
-    // Validate payment_status if provided
-    if (
-      updates.payment_status &&
-      !["PENDING", "PAID", "FAILED", "REFUNDED"].includes(
-        updates.payment_status
-      )
-    ) {
-      return NextResponse.json(
-        { error: "Invalid payment status provided" },
-        { status: 400 }
-      );
-    }
-
-    const supabaseAdmin = createSupabaseAdminClient();
-
-    const { data, error } = await supabaseAdmin
-      .from("orders")
-      .update({
-        ...updates,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", orderId)
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Error updating order:", error);
-      return NextResponse.json(
-        { error: "Failed to update order" },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({
-      message: "Order updated successfully",
-      order: data,
-    });
-  } catch (error) {
-    console.error("Error in order update API:", error);
+    console.error("Error in order API:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -118,40 +69,69 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const orderId = params.id;
-    const supabaseAdmin = createSupabaseAdminClient();
+    const supabase = createSupabaseServerClient();
 
-    // Delete order items first (if not using CASCADE)
-    const { error: itemsError } = await supabaseAdmin
-      .from("order_items")
-      .delete()
-      .eq("order_id", orderId);
+    // Check if user is authenticated and is admin
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-    if (itemsError) {
-      console.error("Error deleting order items:", itemsError);
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", session.user.id)
+      .single();
+
+    if (profileError || !profile?.is_admin) {
       return NextResponse.json(
-        { error: "Failed to delete order items" },
-        { status: 500 }
+        { error: "Admin access required" },
+        { status: 403 }
       );
     }
 
-    // Delete the order
-    const { error: orderError } = await supabaseAdmin
+    // Check if order exists and can be deleted
+    const { data: order, error: fetchError } = await supabase
+      .from("orders")
+      .select("status")
+      .eq("id", params.id)
+      .single();
+
+    if (fetchError) {
+      return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    }
+
+    // Only allow deletion of pending orders
+    if (order.status !== "PENDING") {
+      return NextResponse.json(
+        { error: "Only pending orders can be deleted" },
+        { status: 400 }
+      );
+    }
+
+    const { error } = await supabase
       .from("orders")
       .delete()
-      .eq("id", orderId);
+      .eq("id", params.id);
 
-    if (orderError) {
-      console.error("Error deleting order:", orderError);
+    if (error) {
+      console.error("Error deleting order:", error);
       return NextResponse.json(
         { error: "Failed to delete order" },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ message: "Order deleted successfully" });
+    return NextResponse.json({
+      success: true,
+      message: "Order deleted successfully",
+    });
   } catch (error) {
-    console.error("Error in order deletion API:", error);
+    console.error("Error in delete order API:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

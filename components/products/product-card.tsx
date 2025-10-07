@@ -12,12 +12,39 @@ import { animations, animationPresets } from "@/lib/animations";
 import { SanityProductPreview } from "@/types/sanity";
 import { urlFor } from "@/lib/sanity";
 
+// Extended product interface to handle both _id and id
+interface ExtendedProduct {
+  _id?: string; // For Sanity products
+  id?: string; // For database products
+  name: string;
+  slug?: { current: string } | string; // Handle both formats
+  description?: string;
+  price: number;
+  images?: any[]; // Flexible image format
+  category?: {
+    _id?: string;
+    id?: string;
+    name: string;
+    slug?: { current: string } | string;
+  };
+  fabric?: string;
+  color?: string;
+  featured?: boolean;
+  newArrival?: boolean;
+  new_arrival?: boolean;
+}
+
 interface ProductCardProps {
-  product: SanityProductPreview;
+  product: ExtendedProduct;
+}
+
+// Helper function to safely get product ID
+function getProductId(product: ExtendedProduct): string {
+  return product._id || product.id || "";
 }
 
 // Helper function to safely get product image URL
-function getProductImageUrl(product: SanityProductPreview): string {
+function getProductImageUrl(product: ExtendedProduct): string {
   try {
     // Check if product has images and the first image is valid
     if (product.images && product.images.length > 0 && product.images[0]) {
@@ -58,6 +85,21 @@ function getProductImageUrl(product: SanityProductPreview): string {
   return "/placeholder-product.jpg";
 }
 
+// Helper function to get product slug
+function getProductSlug(product: ExtendedProduct): string {
+  if (typeof product.slug === "string") {
+    return product.slug;
+  }
+  if (
+    product.slug &&
+    typeof product.slug === "object" &&
+    getProductSlug(product)
+  ) {
+    return getProductSlug(product);
+  }
+  return "";
+}
+
 export function ProductCard({ product }: ProductCardProps) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -72,7 +114,7 @@ export function ProductCard({ product }: ProductCardProps) {
     setIsAddingToCart(true);
 
     addItem({
-      id: product._id,
+      id: getProductId(product),
       name: product.name,
       price: product.price,
       image: getProductImageUrl(product),
@@ -82,8 +124,9 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   const handleWishlistToggle = () => {
-    if (isLiked(product._id)) {
-      removeFromWishlist(product._id);
+    const productId = getProductId(product);
+    if (isLiked(productId)) {
+      removeFromWishlist(productId);
     } else {
       addToWishlist(product);
     }
@@ -100,151 +143,109 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <motion.div
-      {...animations.slideUp}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden relative"
+      className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden relative cursor-pointer"
+      whileHover={{ y: -8, scale: 1.02 }}
     >
-      {/* Premium Badge */}
-      <div className="absolute top-4 left-4 z-10">
-        <motion.div
-          {...animations.scaleIn}
-          transition={{ delay: 0.2, duration: 0.4 }}
-          className="bg-gradient-to-r from-amber-600 to-amber-700 text-white text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg"
-        >
-          {product.category?.name || "Premium"}
-        </motion.div>
-      </div>
-
       {/* Heart Button */}
-      <div className="absolute top-4 right-4 z-10">
+      <div className="absolute top-3 right-3 z-10">
         <motion.button
-          {...animations.buttonHover}
-          onClick={handleWishlistToggle}
-          className="w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleWishlistToggle();
+          }}
+          className="w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
           <Heart
-            size={16}
+            size={14}
             className={`transition-colors ${
-              isLiked(product._id)
+              isLiked(getProductId(product))
                 ? "fill-red-500 text-red-500"
-                : "text-gray-600"
+                : "text-gray-400 group-hover:text-gray-600"
             }`}
           />
         </motion.button>
       </div>
 
-      {/* Image Container */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-amber-50 to-stone-100">
-        <Image
-          src={getProductImageUrl(product)}
-          alt={product.images[0]?.alt || product.name}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-        {/* Quick Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-          transition={{ duration: 0.2 }}
-          className="absolute inset-0 flex items-center justify-center"
-        >
-          <div className="flex space-x-3">
-            <motion.button
-              {...animations.buttonHover}
-              onClick={handleAddToCart}
-              disabled={isAddingToCart}
-              className="flex items-center space-x-2 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 font-medium"
-            >
-              <ShoppingCart size={16} />
-              <span className="text-sm">
-                {isAddingToCart ? "Adding..." : "Add to Cart"}
-              </span>
-            </motion.button>
-
-            <Link href={`/products/${product.slug.current}`}>
-              <motion.button
-                {...animations.buttonHover}
-                className="w-10 h-10 bg-white/90 backdrop-blur rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                <Eye size={16} className="text-gray-600" />
-              </motion.button>
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* Rating Stars */}
-        <div className="absolute bottom-4 left-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.8 }}
-            transition={{ duration: 0.2 }}
-            className="flex items-center space-x-1"
-          >
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                size={12}
-                className="text-yellow-400 fill-current"
-              />
-            ))}
-            <span className="text-xs text-white ml-2 bg-black/30 backdrop-blur px-2 py-1 rounded-full">
-              4.9
-            </span>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-6 space-y-4">
-        {/* Product Name */}
-        <Link href={`/products/${product.slug.current}`}>
-          <motion.h3
-            {...animations.fadeIn}
-            className="text-lg font-serif font-bold text-gray-900 line-clamp-2 group-hover:text-amber-600 transition-colors cursor-pointer"
-          >
-            {product.name}
-          </motion.h3>
+      {/* Image Container - 4:3 Ratio */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
+        <Link href={`/products/${getProductSlug(product)}`}>
+          <Image
+            src={getProductImageUrl(product)}
+            alt={product.name}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          />
         </Link>
 
-        {/* Price and Action */}
-        <div className="flex items-center justify-between">
-          <div>
-            <motion.p className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-700 bg-clip-text text-transparent">
-              {formatPrice(product.price)}
-            </motion.p>
-            <p className="text-sm text-gray-600">Free shipping</p>
-          </div>
-
-          <Link href={`/products/${product.slug.current}`}>
-            <motion.button
-              {...animations.buttonHover}
-              className="bg-gradient-to-r from-amber-50 to-stone-100 hover:from-amber-100 hover:to-amber-200 text-gray-700 px-4 py-2 rounded-xl font-medium transition-all duration-200 shadow-sm hover:shadow-md"
-            >
-              View Details
-            </motion.button>
-          </Link>
-        </div>
-
-        {/* Features */}
-        <div className="flex flex-wrap gap-2">
-          {["Handwoven", "Pure Silk", "Premium"].map((feature, index) => (
-            <span
-              key={index}
-              className="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full"
-            >
-              {feature}
-            </span>
-          ))}
-        </div>
+        {/* Subtle overlay on hover */}
+        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Shimmer Effect */}
-      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-out" />
+      {/* Product Info */}
+      <div className="p-4">
+        <Link href={`/products/${getProductSlug(product)}`}>
+          <div className="space-y-2">
+            {/* Category */}
+
+            {/* Product Name */}
+            <h3
+              className="text-sm font-medium text-gray-900 group-hover:text-rich-brown transition-colors duration-300 leading-tight overflow-hidden"
+              style={{
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {product.name}
+            </h3>
+
+            {/* Price */}
+            <div className="flex items-center justify-between">
+              <p className="text-lg font-semibold text-gray-900 group-hover:text-rich-brown transition-colors duration-300">
+                {formatPrice(product.price)}
+              </p>
+
+              {/* Add to Cart Button - Appears on Hover */}
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{
+                  opacity: isHovered ? 1 : 0,
+                  x: isHovered ? 0 : 10,
+                }}
+                transition={{ duration: 0.2 }}
+                className="flex-1 ml-3"
+              >
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleAddToCart();
+                  }}
+                  disabled={isAddingToCart}
+                  size="sm"
+                  className="w-full h-8 bg-rich-brown text-white hover:bg-rich-brown/90 transition-all duration-200 text-xs"
+                >
+                  {isAddingToCart ? (
+                    <div className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <ShoppingCart size={12} className="mr-1" />
+                  )}
+                  {isAddingToCart ? "" : "Add"}
+                </Button>
+              </motion.div>
+            </div>
+          </div>
+        </Link>
+      </div>
     </motion.div>
   );
 }

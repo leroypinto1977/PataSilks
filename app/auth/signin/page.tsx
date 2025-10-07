@@ -97,7 +97,7 @@ export default function SignInPage() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required={isSignUp}
-                  className="border-rich-beige/20 focus:border-rich-beige"
+                  className="border-rich-brown/20 focus:border-rich-brown"
                 />
               </div>
             )}
@@ -111,7 +111,7 @@ export default function SignInPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="border-rich-beige/20 focus:border-rich-beige"
+                className="border-rich-brown/20 focus:border-rich-brown"
               />
             </div>
 
@@ -125,7 +125,7 @@ export default function SignInPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="border-rich-beige/20 focus:border-rich-beige pr-10"
+                  className="border-rich-brown/20 focus:border-rich-brown pr-10"
                 />
                 <button
                   type="button"
@@ -160,7 +160,7 @@ export default function SignInPage() {
                 setPassword("");
                 setFullName("");
               }}
-              className="ml-1 text-rich-beige hover:text-rich-beige font-medium"
+              className="ml-1 text-rich-brown hover:text-rich-brown font-medium"
             >
               {isSignUp ? "Sign in" : "Sign up"}
             </button>
@@ -176,11 +176,11 @@ export default function SignInPage() {
           </div>
 
           {/* Demo credentials info */}
-          <div className="mt-4 p-3 bg-rich-beige/5 rounded-lg border border-rich-beige/20">
-            <p className="text-xs text-rich-beige font-medium mb-1">
+          <div className="mt-4 p-3 bg-rich-brown/5 rounded-lg border border-rich-brown/20">
+            <p className="text-xs text-rich-brown font-medium mb-1">
               Demo Access:
             </p>
-            <p className="text-xs text-rich-beige">
+            <p className="text-xs text-rich-brown">
               Create an account or contact admin for access
             </p>
           </div>

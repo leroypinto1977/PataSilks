@@ -67,7 +67,7 @@ export default function ContactPage() {
               className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
             >
               Get in
-              <span className="text-rich-beige"> Touch</span>
+              <span className="text-rich-brown"> Touch</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -109,7 +109,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rich-beige focus:border-rich-beige transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rich-brown focus:border-rich-brown transition-colors"
                   />
                 </div>
                 <div>
@@ -126,7 +126,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rich-beige focus:border-rich-beige transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rich-brown focus:border-rich-brown transition-colors"
                   />
                 </div>
               </div>
@@ -145,7 +145,7 @@ export default function ContactPage() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rich-beige focus:border-rich-beige transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rich-brown focus:border-rich-brown transition-colors"
                 />
               </div>
 
@@ -163,13 +163,13 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rich-beige focus:border-rich-beige transition-colors resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rich-brown focus:border-rich-brown transition-colors resize-none"
                 />
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-rich-beige hover:bg-rich-beige/90 text-white py-3 rounded-lg font-semibold transition-colors"
+                className="w-full bg-rich-brown hover:bg-rich-brown/90 text-white py-3 rounded-lg font-semibold transition-colors"
               >
                 <Send className="w-5 h-5 mr-2" />
                 Send Message
@@ -203,8 +203,8 @@ export default function ContactPage() {
                   transition={{ delay: 0.3 + index * 0.1 }}
                   className="flex items-start space-x-4"
                 >
-                  <div className="w-12 h-12 bg-rich-beige/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <info.icon className="w-6 h-6 text-rich-beige" />
+                  <div className="w-12 h-12 bg-rich-brown/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <info.icon className="w-6 h-6 text-rich-brown" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">

@@ -69,10 +69,10 @@ export default function PrivacyPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 bg-rich-beige/10 border border-rich-beige/20 rounded-full px-6 py-3 mb-6"
+              className="inline-flex items-center space-x-2 bg-rich-brown/10 border border-rich-brown/20 rounded-full px-6 py-3 mb-6"
             >
-              <Shield className="text-rich-beige" size={20} />
-              <span className="text-rich-beige font-semibold">
+              <Shield className="text-rich-brown" size={20} />
+              <span className="text-rich-brown font-semibold">
                 Privacy Policy
               </span>
             </motion.div>
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
               className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
             >
               Your Privacy
-              <span className="text-rich-beige"> Matters</span>
+              <span className="text-rich-brown"> Matters</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-rich-beige/5 rounded-2xl p-6 mb-12"
+          className="bg-rich-brown/5 rounded-2xl p-6 mb-12"
         >
           <p className="text-gray-700">
             <strong>Last Updated:</strong> December 2024
@@ -126,8 +126,8 @@ export default function PrivacyPage() {
               className="bg-white rounded-2xl shadow-lg p-8"
             >
               <div className="flex items-center space-x-4 mb-6">
-                <div className="w-12 h-12 bg-rich-beige/10 rounded-lg flex items-center justify-center">
-                  <section.icon className="w-6 h-6 text-rich-beige" />
+                <div className="w-12 h-12 bg-rich-brown/10 rounded-lg flex items-center justify-center">
+                  <section.icon className="w-6 h-6 text-rich-brown" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">
                   {section.title}
@@ -136,7 +136,7 @@ export default function PrivacyPage() {
               <ul className="space-y-3">
                 {section.content.map((item, itemIndex) => (
                   <li key={itemIndex} className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-rich-beige rounded-full flex-shrink-0 mt-2"></div>
+                    <div className="w-2 h-2 bg-rich-brown rounded-full flex-shrink-0 mt-2"></div>
                     <span className="text-gray-700">{item}</span>
                   </li>
                 ))}
@@ -159,7 +159,7 @@ export default function PrivacyPage() {
           <div className="grid md:grid-cols-2 gap-4">
             {rights.map((right, index) => (
               <div key={index} className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-rich-beige rounded-full flex-shrink-0"></div>
+                <div className="w-2 h-2 bg-rich-brown rounded-full flex-shrink-0"></div>
                 <span className="text-gray-700">{right}</span>
               </div>
             ))}
@@ -226,7 +226,7 @@ export default function PrivacyPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mt-12 bg-rich-beige/5 rounded-2xl p-8"
+          className="mt-12 bg-rich-brown/5 rounded-2xl p-8"
         >
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Contact Us</h2>
           <p className="text-gray-700 mb-6">

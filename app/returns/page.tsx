@@ -85,10 +85,10 @@ export default function ReturnsPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 bg-rich-beige/10 border border-rich-beige/20 rounded-full px-6 py-3 mb-6"
+              className="inline-flex items-center space-x-2 bg-rich-brown/10 border border-rich-brown/20 rounded-full px-6 py-3 mb-6"
             >
-              <RotateCcw className="text-rich-beige" size={20} />
-              <span className="text-rich-beige font-semibold">
+              <RotateCcw className="text-rich-brown" size={20} />
+              <span className="text-rich-brown font-semibold">
                 Returns & Exchanges
               </span>
             </motion.div>
@@ -97,7 +97,7 @@ export default function ReturnsPage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
             >
-              Easy Returns &<span className="text-rich-beige"> Exchanges</span>
+              Easy Returns &<span className="text-rich-brown"> Exchanges</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -131,11 +131,11 @@ export default function ReturnsPage() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white rounded-2xl shadow-lg p-6 text-center relative"
               >
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-rich-beige text-white rounded-full flex items-center justify-center font-bold text-sm">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-rich-brown text-white rounded-full flex items-center justify-center font-bold text-sm">
                   {step.step}
                 </div>
-                <div className="w-16 h-16 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-4 mt-4">
-                  <step.icon className="w-8 h-8 text-rich-beige" />
+                <div className="w-16 h-16 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-4 mt-4">
+                  <step.icon className="w-8 h-8 text-rich-brown" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">
                   {step.title}
@@ -165,8 +165,8 @@ export default function ReturnsPage() {
                 transition={{ delay: 0.3 + index * 0.1 }}
                 className="bg-white rounded-2xl shadow-lg p-6"
               >
-                <div className="w-12 h-12 bg-rich-beige/10 rounded-lg flex items-center justify-center mb-4">
-                  <policy.icon className="w-6 h-6 text-rich-beige" />
+                <div className="w-12 h-12 bg-rich-brown/10 rounded-lg flex items-center justify-center mb-4">
+                  <policy.icon className="w-6 h-6 text-rich-brown" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">
                   {policy.title}
@@ -284,7 +284,7 @@ export default function ReturnsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="text-center bg-rich-beige/5 rounded-2xl p-8"
+          className="text-center bg-rich-brown/5 rounded-2xl p-8"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
             Need Help with Your Return?
@@ -296,13 +296,13 @@ export default function ReturnsPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/contact"
-              className="bg-rich-beige text-white px-8 py-3 rounded-lg font-semibold hover:bg-rich-beige/90 transition-colors"
+              className="bg-rich-brown text-white px-8 py-3 rounded-lg font-semibold hover:bg-rich-brown/90 transition-colors"
             >
               Contact Us
             </a>
             <a
               href="mailto:returns@pattasilks.com"
-              className="border border-rich-beige text-rich-beige px-8 py-3 rounded-lg font-semibold hover:bg-rich-beige hover:text-white transition-colors"
+              className="border border-rich-brown text-rich-brown px-8 py-3 rounded-lg font-semibold hover:bg-rich-brown hover:text-white transition-colors"
             >
               Email Returns Team
             </a>

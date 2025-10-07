@@ -57,12 +57,12 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-pink-50 to-primary-pink-100 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-primary-brown-50 to-primary-brown-100 relative overflow-hidden">
       {/* Background Patterns */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-primary-pink-400 to-blush rounded-full blur-xl" />
+        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-primary-brown-400 to-blush rounded-full blur-xl" />
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-blush to-rose-gold rounded-full blur-xl" />
-        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-gradient-to-br from-rose-gold to-primary-pink-400 rounded-full blur-lg" />
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-gradient-to-br from-rose-gold to-primary-brown-400 rounded-full blur-lg" />
       </div>
 
       <motion.div
@@ -80,15 +80,15 @@ export function TestimonialsSection() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur rounded-full px-6 py-3 shadow-lg mb-6"
           >
-            <Quote className="text-primary-pink-600" size={20} />
-            <span className="text-primary-pink-700 font-semibold">
+            <Quote className="text-primary-brown-600" size={20} />
+            <span className="text-primary-brown-700 font-semibold">
               Customer Stories
             </span>
           </motion.div>
 
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
             What Our Customers
-            <span className="bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary-brown-600 to-primary-brown-700 bg-clip-text text-transparent">
               {" "}
               Say
             </span>
@@ -117,10 +117,10 @@ export function TestimonialsSection() {
             >
               <div className="bg-white/80 backdrop-blur rounded-3xl p-8 shadow-xl border border-white/50 h-full relative overflow-hidden">
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-pink-50/50 to-blush/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-brown-50/50 to-blush/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Quote Icon */}
-                <div className="absolute top-6 right-6 w-12 h-12 bg-gradient-to-r from-primary-pink-500 to-primary-pink-700 rounded-full flex items-center justify-center opacity-20">
+                <div className="absolute top-6 right-6 w-12 h-12 bg-gradient-to-r from-primary-brown-500 to-primary-brown-700 rounded-full flex items-center justify-center opacity-20">
                   <Quote size={20} className="text-white" />
                 </div>
 
@@ -147,9 +147,9 @@ export function TestimonialsSection() {
                       <img
                         src={testimonial.avatar}
                         alt={testimonial.name}
-                        className="w-12 h-12 rounded-full object-cover border-2 border-primary-pink-200"
+                        className="w-12 h-12 rounded-full object-cover border-2 border-primary-brown-200"
                       />
-                      <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-gradient-to-r from-primary-pink-500 to-primary-pink-700 rounded-full border-2 border-white" />
+                      <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-gradient-to-r from-primary-brown-500 to-primary-brown-700 rounded-full border-2 border-white" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900">
@@ -171,7 +171,7 @@ export function TestimonialsSection() {
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center space-x-3 bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center space-x-3 bg-gradient-to-r from-primary-brown-600 to-primary-brown-700 text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
           >
             <Star size={20} className="text-yellow-300" />
             <span className="font-semibold">Read More Reviews</span>

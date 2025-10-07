@@ -31,7 +31,7 @@ export function CartItem({ item }: CartItemProps) {
     <div className="bg-white rounded-2xl shadow-lg p-6">
       <div className="flex items-center space-x-4">
         {/* Product Image */}
-        <div className="w-20 h-20 rounded-xl overflow-hidden bg-rich-beige/10 flex-shrink-0">
+        <div className="w-20 h-20 rounded-xl overflow-hidden bg-rich-brown/10 flex-shrink-0">
           <Image
             src={item.image}
             alt={item.name}
@@ -46,7 +46,7 @@ export function CartItem({ item }: CartItemProps) {
           <h3 className="font-serif font-bold text-gray-900 truncate">
             {item.name}
           </h3>
-          <p className="text-rich-beige font-bold">{formatPrice(item.price)}</p>
+          <p className="text-rich-brown font-bold">{formatPrice(item.price)}</p>
         </div>
 
         {/* Quantity Controls */}
@@ -54,7 +54,7 @@ export function CartItem({ item }: CartItemProps) {
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 border-rich-beige/20"
+            className="h-8 w-8 border-rich-brown/20"
             onClick={() => updateQuantity(item.id, item.quantity - 1)}
           >
             <Minus size={14} />
@@ -65,7 +65,7 @@ export function CartItem({ item }: CartItemProps) {
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 border-rich-beige/20"
+            className="h-8 w-8 border-rich-brown/20"
             onClick={() => updateQuantity(item.id, item.quantity + 1)}
           >
             <Plus size={14} />

@@ -39,22 +39,24 @@ const config: Config = {
         ],
       },
       colors: {
-        // Customer Website - Premium Beige Theme
-        "primary-pink": {
-          50: "#FDFCFA", // Ultra light beige
-          100: "#F9F7F4", // Very light beige background
-          200: "#F2EDE6", // Medium beige for accents
-          300: "#E8DCCF", // Darker beige for hover states
-          400: "#D4C4B0", // Deep beige for emphasis
-          500: "#C4B299", // Main brand beige
-          600: "#B8A085", // Darker brand beige
-          700: "#A68F73", // Deep brand beige
-          800: "#8B7A61", // Very deep beige
-          900: "#6B5D4A", // Darkest beige
+        // Customer Website - Premium Brown Theme
+        "primary-brown": {
+          50: "#FAF8F5", // Ultra light cream
+          100: "#F5F1EA", // Very light cream background
+          200: "#E8DED0", // Light warm cream
+          300: "#D4C4B0", // Warm tan for accents
+          400: "#A68B6E", // Medium brown
+          500: "#4B381E", // Main brand brown
+          600: "#3D2F19", // Darker brown
+          700: "#2F2514", // Deep brown
+          800: "#211B0F", // Very deep brown
+          900: "#13110A", // Darkest brown
         },
-        "premium-beige": "#EDE6D9", // Main premium color
-        "warm-beige": "#F5F0E8", // Light warm beige
-        "rich-beige": "#D4C4B0", // Rich beige accent
+        "premium-brown": "#4B381E", // Main premium color
+        "warm-cream": "#F5F1EA", // Light warm cream
+        "rich-brown": "#4B381E", // Rich brown accent
+        "golden-tan": "#C9A870", // Golden tan complement
+        terracotta: "#B85C38", // Terracotta accent
 
         // Admin Panel - Dark Monochromatic Theme
         admin: {
@@ -72,15 +74,18 @@ const config: Config = {
           info: "#17A2B8",
         },
 
-        // Legacy colors (deprecated - keeping for compatibility)
+        // Legacy colors (updated for brown theme)
         cream: {
-          50: "#FAF7F0",
-          100: "#F5F3EE",
-          200: "#F0EDE6",
+          50: "#FAF8F5",
+          100: "#F5F1EA",
+          200: "#E8DED0",
         },
         brown: {
-          700: "#5C4033",
-          900: "#2D1B15",
+          500: "#4B381E",
+          600: "#3D2F19",
+          700: "#2F2514",
+          800: "#211B0F",
+          900: "#13110A",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

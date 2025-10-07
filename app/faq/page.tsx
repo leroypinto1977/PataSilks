@@ -125,10 +125,10 @@ export default function FAQPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 bg-rich-beige/10 border border-rich-beige/20 rounded-full px-6 py-3 mb-6"
+              className="inline-flex items-center space-x-2 bg-rich-brown/10 border border-rich-brown/20 rounded-full px-6 py-3 mb-6"
             >
-              <HelpCircle className="text-rich-beige" size={20} />
-              <span className="text-rich-beige font-semibold">
+              <HelpCircle className="text-rich-brown" size={20} />
+              <span className="text-rich-brown font-semibold">
                 Frequently Asked Questions
               </span>
             </motion.div>
@@ -138,7 +138,7 @@ export default function FAQPage() {
               className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
             >
               How Can We
-              <span className="text-rich-beige"> Help You?</span>
+              <span className="text-rich-brown"> Help You?</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -218,7 +218,7 @@ export default function FAQPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-center mt-16 bg-rich-beige/5 rounded-2xl p-8"
+          className="text-center mt-16 bg-rich-brown/5 rounded-2xl p-8"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
             Still have questions?
@@ -230,13 +230,13 @@ export default function FAQPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/contact"
-              className="bg-rich-beige text-white px-8 py-3 rounded-lg font-semibold hover:bg-rich-beige/90 transition-colors"
+              className="bg-rich-brown text-white px-8 py-3 rounded-lg font-semibold hover:bg-rich-brown/90 transition-colors"
             >
               Contact Us
             </a>
             <a
               href="mailto:support@pattasilks.com"
-              className="border border-rich-beige text-rich-beige px-8 py-3 rounded-lg font-semibold hover:bg-rich-beige hover:text-white transition-colors"
+              className="border border-rich-brown text-rich-brown px-8 py-3 rounded-lg font-semibold hover:bg-rich-brown hover:text-white transition-colors"
             >
               Email Support
             </a>

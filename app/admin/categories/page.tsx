@@ -219,7 +219,7 @@ export default function CategoriesManagement() {
                   setEditingCategory(null);
                   setFormData({ name: "", description: "", color: "#3B82F6" });
                 }}
-                className="bg-primary-pink-600 hover:bg-primary-pink-700"
+                className="bg-primary-brown-600 hover:bg-primary-brown-700"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Category
@@ -366,7 +366,7 @@ export default function CategoriesManagement() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <Sparkles className="h-10 w-10 text-primary-pink-600" />
+                <Sparkles className="h-10 w-10 text-primary-brown-600" />
                 <div className="ml-4">
                   <p className="text-sm font-medium text-muted-foreground">
                     Popular Category
@@ -419,7 +419,7 @@ export default function CategoriesManagement() {
           <CardContent>
             {loading ? (
               <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-pink-600"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-brown-600"></div>
               </div>
             ) : (
               <Table>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -28,64 +28,98 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { motion } from "framer-motion";
 
-// Mock data for testing
-const mockStats = {
-  totalProducts: 127,
-  totalCategories: 8,
-  salesThisMonth: 43,
-  totalRevenue: 2847500,
-  monthlyRevenue: 485700,
-  activeProducts: 119,
-  outOfStock: 8,
-  featuredProducts: 15,
-  recentOrders: [
-    {
-      id: "order_001",
-      customer_name: "Priya Sharma",
-      total_amount: 12500,
-      status: "DELIVERED",
-      created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-    },
-    {
-      id: "order_002",
-      customer_name: "Anita Desai",
-      total_amount: 8900,
-      status: "SHIPPED",
-      created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-    },
-  ],
-  recentProducts: [
-    {
-      id: "prod_001",
-      name: "Banarasi Silk Saree",
-      category: "Silk",
-      price: 15600,
-      featured: true,
-      active: true,
-      created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-    },
-    {
-      id: "prod_002",
-      name: "Kanjivaram Wedding Saree",
-      category: "Wedding",
-      price: 22500,
-      featured: true,
-      active: true,
-      created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-    },
-  ],
-};
+interface DashboardStats {
+  totalProducts: number;
+  totalCategories: number;
+  salesThisMonth: number;
+  totalRevenue: number;
+  monthlyRevenue: number;
+  activeProducts: number;
+  outOfStock: number;
+  featuredProducts: number;
+  recentOrders: Array<{
+    id: string;
+    customer_name: string;
+    total_amount: number;
+    status: string;
+    created_at: string;
+  }>;
+  recentProducts: Array<{
+    id: string;
+    name: string;
+    category: string;
+    price: number;
+    featured: boolean;
+    active: boolean;
+    created_at: string;
+  }>;
+}
 
 export default function AdminDashboard() {
-  const stats = mockStats;
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch dashboard stats
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        console.log("🔄 Fetching dashboard stats...");
+        const response = await fetch("/api/admin/dashboard/stats");
+        console.log("📡 Response status:", response.status);
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("✅ Dashboard data received:", data);
+          setStats(data);
+        } else {
+          const errorData = await response.json();
+          console.error("❌ Failed to fetch dashboard stats:", errorData);
+        }
+      } catch (error) {
+        console.error("❌ Error fetching dashboard stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   // Debug logging
   useEffect(() => {
     console.log("🎯 Admin page component mounted successfully!");
     console.log("📊 Stats loaded:", stats);
-  }, []);
+  }, [stats]);
 
   console.log("🏗️ Admin page rendering...");
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-0 py-6">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rich-brown mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading dashboard...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!stats) {
+    return (
+      <div className="container mx-auto px-4 py-6">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Dashboard Error
+          </h1>
+          <p className="text-gray-600">
+            Failed to load dashboard data. Please try again.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-IN", {
@@ -235,7 +269,7 @@ export default function AdminDashboard() {
           <Card className="bg-card border-border">
             <CardContent className="p-6">
               <div className="flex items-center">
-                <DollarSign className="h-10 w-10 text-primary-pink-600" />
+                <DollarSign className="h-10 w-10 text-primary-brown-600" />
                 <div className="ml-4">
                   <p className="text-sm font-medium text-muted-foreground">
                     Monthly Revenue
@@ -369,10 +403,10 @@ export default function AdminDashboard() {
               <Link href="/admin/products/new">
                 <Button
                   variant="outline"
-                  className="w-full h-20 flex flex-col space-y-2 hover:bg-primary-pink-50 hover:border-primary-pink-300 border-border"
+                  className="w-full h-20 flex flex-col space-y-2 hover:bg-primary-brown-50  border-border"
                 >
-                  <Plus className="h-6 w-6 text-primary-pink-600" />
-                  <span className="text-sm text-foreground font-medium">
+                  <Plus className="h-6 w-6 text-primary-brown-600" />
+                  <span className="text-sm text-foreground font-medium hover:text-black">
                     Add Saree
                   </span>
                 </Button>
@@ -476,7 +510,7 @@ export default function AdminDashboard() {
                         <p className="font-medium text-foreground">
                           {order.customer_name}
                         </p>
-                        <p className="text-sm text-primary-pink-600 font-medium">
+                        <p className="text-sm text-primary-brown-600 font-medium">
                           {formatPrice(order.total_amount)}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -559,13 +593,13 @@ export default function AdminDashboard() {
                             {product.name}
                           </p>
                           {product.featured && (
-                            <Star className="h-4 w-4 text-primary-pink-500 fill-current" />
+                            <Star className="h-4 w-4 text-primary-brown-500 fill-current" />
                           )}
                         </div>
                         <p className="text-sm text-muted-foreground">
                           {product.category}
                         </p>
-                        <p className="text-sm font-medium text-primary-pink-600">
+                        <p className="text-sm font-medium text-primary-brown-600">
                           {formatPrice(product.price)}
                         </p>
                       </div>

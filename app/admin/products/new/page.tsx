@@ -404,7 +404,7 @@ export default function AddSareePage() {
                             disabled
                           />
                         </div>
-                        <p className="text-xs text-primary-pink-600 mt-1">
+                        <p className="text-xs text-primary-brown-600 mt-1">
                           ⚠️ Strike-through pricing will be available after
                           database migration.
                         </p>
@@ -738,7 +738,7 @@ export default function AddSareePage() {
                     <div className="space-y-3">
                       <Button
                         type="submit"
-                        className="w-full bg-primary-pink-600 hover:bg-primary-pink-700 text-white"
+                        className="w-full bg-primary-brown-600 hover:bg-primary-brown-700 text-white"
                         disabled={saving}
                       >
                         <Save className="h-4 w-4 mr-2" />

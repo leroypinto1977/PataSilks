@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function CTASection() {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-pink-50 to-primary-pink-100 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-primary-brown-50 to-primary-brown-100 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -39,15 +39,15 @@ export function CTASection() {
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur rounded-full px-6 py-3 shadow-lg mb-6"
               >
-                <ShoppingBag className="text-primary-pink-600" size={20} />
-                <span className="text-primary-pink-700 font-semibold">
+                <ShoppingBag className="text-primary-brown-600" size={20} />
+                <span className="text-primary-brown-700 font-semibold">
                   Ready to Shop?
                 </span>
               </motion.div>
 
               <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
                 Experience the Magic of
-                <span className="block bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-primary-brown-600 to-primary-brown-700 bg-clip-text text-transparent">
                   Authentic Silk
                 </span>
               </h2>
@@ -66,7 +66,7 @@ export function CTASection() {
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group inline-flex items-center space-x-3 bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                  className="group inline-flex items-center space-x-3 bg-gradient-to-r from-primary-brown-600 to-primary-brown-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 >
                   <ShoppingBag size={20} />
                   <span className="font-semibold">Shop Collection</span>
@@ -80,7 +80,7 @@ export function CTASection() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group inline-flex items-center space-x-3 bg-white/80 backdrop-blur border-2 border-primary-pink-600 text-primary-pink-700 px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className="group inline-flex items-center space-x-3 bg-white/80 backdrop-blur border-2 border-primary-brown-600 text-primary-brown-700 px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 <Phone size={20} />
                 <span className="font-semibold">Book Appointment</span>
@@ -92,7 +92,7 @@ export function CTASection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="grid grid-cols-3 gap-6 pt-8 border-t border-primary-pink-200"
+              className="grid grid-cols-3 gap-6 pt-8 border-t border-primary-brown-200"
             >
               {[
                 { number: "175+", label: "Years Heritage" },
@@ -100,7 +100,7 @@ export function CTASection() {
                 { number: "10K+", label: "Happy Customers" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-primary-pink-700">
+                  <div className="text-2xl font-bold text-primary-brown-700">
                     {stat.number}
                   </div>
                   <div className="text-sm text-gray-600">{stat.label}</div>
@@ -123,10 +123,10 @@ export function CTASection() {
                 whileHover={{ scale: 1.02 }}
                 className="bg-white/80 backdrop-blur rounded-3xl p-8 shadow-xl border border-white/50 relative overflow-hidden group"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-pink-50/50 to-blush/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-brown-50/50 to-blush/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative z-10">
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-primary-pink-500 to-primary-pink-600 rounded-2xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-primary-brown-500 to-primary-brown-600 rounded-2xl flex items-center justify-center">
                       <MapPin size={20} className="text-white" />
                     </div>
                     <div className="flex-1">
@@ -152,10 +152,10 @@ export function CTASection() {
                 whileHover={{ scale: 1.02 }}
                 className="bg-white/80 backdrop-blur rounded-3xl p-8 shadow-xl border border-white/50 relative overflow-hidden group"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-rose-gold/20 to-primary-pink-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-rose-gold/20 to-primary-brown-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative z-10">
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-rose-gold to-primary-pink-400 rounded-2xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-rose-gold to-primary-brown-400 rounded-2xl flex items-center justify-center">
                       <Phone size={20} className="text-white" />
                     </div>
                     <div className="flex-1">
@@ -192,7 +192,7 @@ export function CTASection() {
               ].map((badge, index) => (
                 <div
                   key={index}
-                  className="bg-primary-pink-100 text-primary-pink-700 px-4 py-2 rounded-full text-sm font-medium"
+                  className="bg-primary-brown-100 text-primary-brown-700 px-4 py-2 rounded-full text-sm font-medium"
                 >
                   {badge}
                 </div>

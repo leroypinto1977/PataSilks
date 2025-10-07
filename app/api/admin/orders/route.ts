@@ -1,26 +1,64 @@
-import { NextResponse } from "next/server";
-import { createSupabaseAdminClient } from "@/lib/supabase-admin";
+import { NextRequest, NextResponse } from "next/server";
+import { createSupabaseServerClient } from "@/lib/supabase-server";
+import { getAllOrders } from "@/lib/razorpay";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const supabaseAdmin = createSupabaseAdminClient();
+    const supabase = createSupabaseServerClient();
 
-    // Get all orders with user profiles and order items
-    const { data: orders, error } = await supabaseAdmin
+    // Check if user is authenticated and is admin
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", session.user.id)
+      .single();
+
+    if (profileError || !profile?.is_admin) {
+      return NextResponse.json(
+        { error: "Admin access required" },
+        { status: 403 }
+      );
+    }
+
+    // Get orders with pagination
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "20");
+    const status = searchParams.get("status");
+    const offset = (page - 1) * limit;
+
+    let query = supabase
       .from("orders")
       .select(
         `
         *,
-        profiles(id, email, full_name),
-        order_items(
+        order_items (
           id,
           quantity,
           price,
-          products(id, name, images)
+          product_id,
+          product_name,
+          product_slug
         )
       `
       )
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .range(offset, offset + limit - 1);
+
+    if (status && status !== "all") {
+      query = query.eq("status", status.toUpperCase());
+    }
+
+    const { data: orders, error } = await query;
 
     if (error) {
       console.error("Error fetching orders:", error);
@@ -30,18 +68,30 @@ export async function GET() {
       );
     }
 
-    // Calculate totals for each order
-    const ordersWithTotals = orders?.map((order) => ({
-      ...order,
-      itemCount: order.order_items?.length || 0,
-      totalAmount:
-        order.order_items?.reduce(
-          (sum: number, item: any) => sum + item.quantity * item.price,
-          0
-        ) || 0,
-    }));
+    // Get total count for pagination
+    let countQuery = supabase
+      .from("orders")
+      .select("id", { count: "exact", head: true });
 
-    return NextResponse.json({ orders: ordersWithTotals });
+    if (status && status !== "all") {
+      countQuery = countQuery.eq("status", status.toUpperCase());
+    }
+
+    const { count, error: countError } = await countQuery;
+
+    if (countError) {
+      console.error("Error fetching orders count:", countError);
+    }
+
+    return NextResponse.json({
+      orders: orders || [],
+      pagination: {
+        page,
+        limit,
+        total: count || 0,
+        pages: Math.ceil((count || 0) / limit),
+      },
+    });
   } catch (error) {
     console.error("Error in orders API:", error);
     return NextResponse.json(
@@ -51,76 +101,80 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+export async function PUT(request: NextRequest) {
   try {
-    const {
-      user_id,
-      total,
-      status = "PENDING",
-      shipping_address,
-      billing_address,
-      payment_method,
-      payment_status = "PENDING",
-      items,
-    } = await request.json();
+    const supabase = createSupabaseServerClient();
 
-    if (!user_id || !total || !items || items.length === 0) {
+    // Check if user is authenticated and is admin
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", session.user.id)
+      .single();
+
+    if (profileError || !profile?.is_admin) {
       return NextResponse.json(
-        { error: "Missing required fields" },
+        { error: "Admin access required" },
+        { status: 403 }
+      );
+    }
+
+    const { orderId, status, notes } = await request.json();
+
+    if (!orderId || !status) {
+      return NextResponse.json(
+        { error: "Order ID and status are required" },
         { status: 400 }
       );
     }
 
-    const supabaseAdmin = createSupabaseAdminClient();
+    // Valid status values
+    const validStatuses = [
+      "PENDING",
+      "CONFIRMED",
+      "SHIPPED",
+      "DELIVERED",
+      "CANCELLED",
+    ];
+    if (!validStatuses.includes(status)) {
+      return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+    }
 
-    // Create the order
-    const { data: order, error: orderError } = await supabaseAdmin
+    const { data: order, error } = await supabase
       .from("orders")
-      .insert({
-        user_id,
-        total,
+      .update({
         status,
-        shipping_address,
-        billing_address,
-        payment_method,
-        payment_status,
+        notes: notes || null,
+        updated_at: new Date().toISOString(),
       })
+      .eq("id", orderId)
       .select()
       .single();
 
-    if (orderError) {
-      console.error("Error creating order:", orderError);
+    if (error) {
+      console.error("Error updating order:", error);
       return NextResponse.json(
-        { error: "Failed to create order" },
+        { error: "Failed to update order" },
         { status: 500 }
       );
     }
 
-    // Create order items
-    const orderItems = items.map((item: any) => ({
-      order_id: order.id,
-      product_id: item.product_id,
-      quantity: item.quantity,
-      price: item.price,
-    }));
-
-    const { error: itemsError } = await supabaseAdmin
-      .from("order_items")
-      .insert(orderItems);
-
-    if (itemsError) {
-      console.error("Error creating order items:", itemsError);
-      // Try to clean up the order if items failed
-      await supabaseAdmin.from("orders").delete().eq("id", order.id);
-      return NextResponse.json(
-        { error: "Failed to create order items" },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({ message: "Order created successfully", order });
+    return NextResponse.json({
+      success: true,
+      order,
+      message: "Order updated successfully",
+    });
   } catch (error) {
-    console.error("Error in order creation API:", error);
+    console.error("Error in update order API:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

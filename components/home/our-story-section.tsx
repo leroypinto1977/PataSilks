@@ -24,7 +24,7 @@ export function OurStorySection() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white to-primary-pink-100">
+    <section className="py-20 bg-gradient-to-br from-white to-primary-brown-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Image */}
@@ -40,7 +40,7 @@ export function OurStorySection() {
               />
 
               {/* Decorative gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-pink-600/10 to-blush/10"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-brown-600/10 to-blush/10"></div>
 
               {/* Decorative corner elements */}
               <div className="absolute top-4 left-4 w-16 h-16 border-l-4 border-t-4 border-white/40 rounded-tl-lg"></div>
@@ -48,7 +48,7 @@ export function OurStorySection() {
             </div>
 
             {/* Floating decorative element */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-pink-200 to-blush rounded-full opacity-80 blur-xl"></div>
+            <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-brown-200 to-blush rounded-full opacity-80 blur-xl"></div>
             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-blush to-rose-gold/50 rounded-full opacity-60 blur-xl"></div>
           </div>
 
@@ -70,7 +70,7 @@ export function OurStorySection() {
               {storyPoints.map((point, index) => (
                 <div key={index} className="flex items-start space-x-4">
                   <div className="flex-shrink-0 mt-1">
-                    <CheckCircle className="w-6 h-6 text-primary-pink-600 fill-current" />
+                    <CheckCircle className="w-6 h-6 text-primary-brown-600 fill-current" />
                   </div>
                   <div>
                     <p className="text-gray-900 font-medium leading-relaxed">
@@ -89,13 +89,13 @@ export function OurStorySection() {
             {/* Additional story highlights */}
             <div className="mt-10 grid grid-cols-2 gap-6">
               <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-primary-pink-600 mb-1">
+                <div className="text-2xl font-bold text-primary-brown-600 mb-1">
                   500+
                 </div>
                 <div className="text-sm text-gray-700">Happy Customers</div>
               </div>
               <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-primary-pink-700 mb-1">
+                <div className="text-2xl font-bold text-primary-brown-700 mb-1">
                   50+
                 </div>
                 <div className="text-sm text-gray-700">Unique Designs</div>

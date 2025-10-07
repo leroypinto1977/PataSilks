@@ -29,7 +29,7 @@ export function CategoriesSection({ categories }: CategoriesSectionProps) {
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             Shop by
-            <span className="text-rich-beige"> Category</span>
+            <span className="text-rich-brown"> Category</span>
           </h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto">
             Explore our curated collections of premium silk textiles
@@ -58,7 +58,7 @@ export function CategoriesSection({ categories }: CategoriesSectionProps) {
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-warm-beige to-premium-beige flex items-center justify-center">
-                      <span className="text-4xl font-bold text-rich-beige">
+                      <span className="text-4xl font-bold text-rich-brown">
                         {category.name.charAt(0)}
                       </span>
                     </div>
@@ -97,7 +97,7 @@ export function CategoriesSection({ categories }: CategoriesSectionProps) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-rich-beige text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-rich-brown text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
               View All Categories
             </motion.button>

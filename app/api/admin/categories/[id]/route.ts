@@ -1,168 +1,151 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase-admin";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const categoryId = params.id;
-    const supabaseAdmin = createSupabaseAdminClient();
-
-    const { data: category, error } = await supabaseAdmin
-      .from("categories")
-      .select(
-        `
-        *,
-        products(
-          id,
-          name,
-          price,
-          images,
-          active,
-          in_stock,
-          featured,
-          created_at
-        )
-      `
-      )
-      .eq("id", categoryId)
-      .single();
-
-    if (error) {
-      console.error("Error fetching category:", error);
-      return NextResponse.json(
-        { error: "Category not found" },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json({ category });
-  } catch (error) {
-    console.error("Error in category fetch API:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const categoryId = params.id;
-    const updates = await request.json();
-
-    const supabaseAdmin = createSupabaseAdminClient();
-
-    // If name is being updated, check for duplicates
-    if (updates.name) {
-      const { data: existing, error: checkError } = await supabaseAdmin
-        .from("categories")
-        .select("id")
-        .eq("name", updates.name)
-        .neq("id", categoryId)
-        .single();
-
-      if (checkError && checkError.code !== "PGRST116") {
-        console.error("Error checking existing category:", checkError);
-        return NextResponse.json(
-          { error: "Failed to check existing category" },
-          { status: 500 }
-        );
-      }
-
-      if (existing) {
-        return NextResponse.json(
-          { error: "Category with this name already exists" },
-          { status: 409 }
-        );
-      }
-    }
-
-    const { data, error } = await supabaseAdmin
-      .from("categories")
-      .update({
-        ...updates,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", categoryId)
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Error updating category:", error);
-      return NextResponse.json(
-        { error: "Failed to update category" },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({
-      message: "Category updated successfully",
-      category: data,
-    });
-  } catch (error) {
-    console.error("Error in category update API:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
-
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
+    const supabase = createSupabaseAdminClient();
     const categoryId = params.id;
-    const supabaseAdmin = createSupabaseAdminClient();
 
-    // Check if category has products
-    const { data: products, error: productsError } = await supabaseAdmin
+    if (!categoryId) {
+      return NextResponse.json(
+        { error: "Category ID is required" },
+        { status: 400 }
+      );
+    }
+
+    console.log("Deleting category:", categoryId);
+
+    // Check if category has associated products
+    const { data: products, error: productsError } = await supabase
       .from("products")
       .select("id")
       .eq("category_id", categoryId)
       .limit(1);
 
     if (productsError) {
-      console.error("Error checking category products:", productsError);
+      console.error("Error checking products:", productsError);
       return NextResponse.json(
-        { error: "Failed to check category products" },
+        { error: "Failed to check associated products" },
         { status: 500 }
       );
     }
 
     if (products && products.length > 0) {
       return NextResponse.json(
-        {
-          error:
-            "Cannot delete category with existing products. Please move or delete the products first.",
-        },
-        { status: 409 }
+        { error: "Cannot delete category with associated products" },
+        { status: 400 }
       );
     }
 
     // Delete the category
-    const { error } = await supabaseAdmin
+    const { error: deleteError } = await supabase
       .from("categories")
       .delete()
       .eq("id", categoryId);
 
-    if (error) {
-      console.error("Error deleting category:", error);
+    if (deleteError) {
+      console.error("Error deleting category:", deleteError);
       return NextResponse.json(
-        { error: "Failed to delete category" },
+        { error: `Failed to delete category: ${deleteError.message}` },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ message: "Category deleted successfully" });
+    console.log("Category deleted successfully:", categoryId);
+    return NextResponse.json(
+      { message: "Category deleted successfully" },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error("Error in category deletion API:", error);
+    console.error("Error in delete category API:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = createSupabaseAdminClient();
+    const categoryId = params.id;
+
+    if (!categoryId) {
+      return NextResponse.json(
+        { error: "Category ID is required" },
+        { status: 400 }
+      );
+    }
+
+    // Get the category
+    const { data: category, error: fetchError } = await supabase
+      .from("categories")
+      .select("*")
+      .eq("id", categoryId)
+      .single();
+
+    if (fetchError) {
+      console.error("Error fetching category:", fetchError);
+      return NextResponse.json(
+        { error: "Category not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ category }, { status: 200 });
+  } catch (error) {
+    console.error("Error in get category API:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = createSupabaseAdminClient();
+    const categoryId = params.id;
+
+    if (!categoryId) {
+      return NextResponse.json(
+        { error: "Category ID is required" },
+        { status: 400 }
+      );
+    }
+
+    const body = await request.json();
+    console.log("Updating category:", categoryId, body);
+
+    // Update the category
+    const { data: category, error: updateError } = await supabase
+      .from("categories")
+      .update(body)
+      .eq("id", categoryId)
+      .select("*")
+      .single();
+
+    if (updateError) {
+      console.error("Error updating category:", updateError);
+      return NextResponse.json(
+        { error: `Failed to update category: ${updateError.message}` },
+        { status: 500 }
+      );
+    }
+
+    console.log("Category updated successfully:", category);
+    return NextResponse.json({ category }, { status: 200 });
+  } catch (error) {
+    console.error("Error in update category API:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

@@ -26,7 +26,7 @@ export function StorySection() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-pink-50 to-primary-pink-100 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-primary-brown-50 to-primary-brown-100 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -52,8 +52,8 @@ export function StorySection() {
                 variants={itemVariants}
                 className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur rounded-full px-6 py-3 shadow-lg"
               >
-                <Clock className="text-primary-pink-600" size={20} />
-                <span className="text-primary-pink-700 font-semibold">
+                <Clock className="text-primary-brown-600" size={20} />
+                <span className="text-primary-brown-700 font-semibold">
                   Heritage Since 1850
                 </span>
               </motion.div>
@@ -63,7 +63,7 @@ export function StorySection() {
                 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900"
               >
                 Our Story of
-                <span className="bg-gradient-to-r from-rose-gold to-primary-pink-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-rose-gold to-primary-brown-400 bg-clip-text text-transparent">
                   {" "}
                   Craftsmanship
                 </span>
@@ -74,7 +74,7 @@ export function StorySection() {
                 className="text-lg text-gray-700 leading-relaxed"
               >
                 For over{" "}
-                <span className="font-semibold text-primary-pink-700">
+                <span className="font-semibold text-primary-brown-700">
                   175 years
                 </span>
                 , Patta Silks has been the epitome of traditional Indian textile
@@ -90,7 +90,7 @@ export function StorySection() {
                 Today, we continue this legacy by preserving ancient weaving
                 techniques while embracing contemporary design sensibilities.
                 Each piece tells a story of
-                <span className="font-semibold text-primary-pink-700">
+                <span className="font-semibold text-primary-brown-700">
                   {" "}
                   dedication, skill, and passion
                 </span>
@@ -103,9 +103,9 @@ export function StorySection() {
               variants={itemVariants}
               className="grid grid-cols-2 gap-6"
             >
-              <div className="bg-white/60 backdrop-blur rounded-2xl p-6 shadow-lg border border-primary-pink-100">
+              <div className="bg-white/60 backdrop-blur rounded-2xl p-6 shadow-lg border border-primary-brown-100">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-r from-rose-gold to-primary-pink-400 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-gold to-primary-brown-400 rounded-full flex items-center justify-center">
                     <Scissors className="text-white" size={20} />
                   </div>
                   <div>
@@ -117,7 +117,7 @@ export function StorySection() {
 
               <div className="bg-white/60 backdrop-blur rounded-2xl p-6 shadow-lg border border-rose-gold/30">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-r from-rose-gold to-primary-pink-400 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-gold to-primary-brown-400 rounded-full flex items-center justify-center">
                     <Award className="text-white" size={20} />
                   </div>
                   <div>
@@ -177,7 +177,7 @@ export function StorySection() {
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               whileHover={{ scale: 1.1, rotate: 5 }}
-              className="absolute -top-4 -right-4 bg-gradient-to-r from-primary-pink-500 to-primary-pink-700 text-white rounded-full p-4 shadow-xl"
+              className="absolute -top-4 -right-4 bg-gradient-to-r from-primary-brown-500 to-primary-brown-700 text-white rounded-full p-4 shadow-xl"
             >
               <Users size={24} />
             </motion.div>

@@ -1,72 +1,72 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Edit, Eye, Trash2, MoreHorizontal } from 'lucide-react'
+import { useState } from "react";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Edit, Eye, Trash2, MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 
 interface Product {
-  id: string
-  name: string
-  price: number
-  active: boolean
+  id: string;
+  name: string;
+  price: number;
+  active: boolean;
   category: {
-    name: string
-  }
-  createdAt: Date
+    name: string;
+  };
+  createdAt: Date;
 }
 
 interface ProductsTableProps {
-  products: Product[]
+  products: Product[];
 }
 
 export function ProductsTable({ products }: ProductsTableProps) {
-  const [loading, setLoading] = useState<string | null>(null)
+  const [loading, setLoading] = useState<string | null>(null);
 
   const toggleProductStatus = async (productId: string, active: boolean) => {
-    setLoading(productId)
+    setLoading(productId);
     try {
       const response = await fetch(`/api/admin/products/${productId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ active: !active })
-      })
-      
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ active: !active }),
+      });
+
       if (response.ok) {
-        window.location.reload()
+        window.location.reload();
       }
     } catch (error) {
-      console.error('Failed to update product status:', error)
+      console.error("Failed to update product status:", error);
     } finally {
-      setLoading(null)
+      setLoading(null);
     }
-  }
+  };
 
   const deleteProduct = async (productId: string) => {
-    if (!confirm('Are you sure you want to delete this product?')) return
-    
-    setLoading(productId)
+    if (!confirm("Are you sure you want to delete this product?")) return;
+
+    setLoading(productId);
     try {
       const response = await fetch(`/api/admin/products/${productId}`, {
-        method: 'DELETE'
-      })
-      
+        method: "DELETE",
+      });
+
       if (response.ok) {
-        window.location.reload()
+        window.location.reload();
       }
     } catch (error) {
-      console.error('Failed to delete product:', error)
+      console.error("Failed to delete product:", error);
     } finally {
-      setLoading(null)
+      setLoading(null);
     }
-  }
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
@@ -101,7 +101,9 @@ export function ProductsTable({ products }: ProductsTableProps) {
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-gray-100 rounded-lg"></div>
                     <div>
-                      <p className="font-medium text-gray-900">{product.name}</p>
+                      <p className="font-medium text-gray-900">
+                        {product.name}
+                      </p>
                     </div>
                   </div>
                 </td>
@@ -109,13 +111,13 @@ export function ProductsTable({ products }: ProductsTableProps) {
                   <Badge variant="secondary">{product.category.name}</Badge>
                 </td>
                 <td className="px-6 py-4">
-                  <span className="font-semibold text-primary-pink-600">
+                  <span className="font-semibold text-primary-brown-600">
                     ₹{product.price.toLocaleString()}
                   </span>
                 </td>
                 <td className="px-6 py-4">
                   <Badge variant={product.active ? "default" : "secondary"}>
-                    {product.active ? 'Active' : 'Inactive'}
+                    {product.active ? "Active" : "Inactive"}
                   </Badge>
                 </td>
                 <td className="px-6 py-4 text-gray-600">
@@ -124,8 +126,8 @@ export function ProductsTable({ products }: ProductsTableProps) {
                 <td className="px-6 py-4 text-right">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button 
-                        variant="ghost" 
+                      <Button
+                        variant="ghost"
                         size="sm"
                         disabled={loading === product.id}
                         className="text-gray-600 hover:text-gray-900"
@@ -147,10 +149,12 @@ export function ProductsTable({ products }: ProductsTableProps) {
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => toggleProductStatus(product.id, product.active)}
+                        onClick={() =>
+                          toggleProductStatus(product.id, product.active)
+                        }
                       >
                         <Eye size={16} className="mr-2" />
-                        {product.active ? 'Deactivate' : 'Activate'}
+                        {product.active ? "Deactivate" : "Activate"}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => deleteProduct(product.id)}
@@ -172,12 +176,12 @@ export function ProductsTable({ products }: ProductsTableProps) {
         <div className="text-center py-12">
           <p className="text-gray-600 mb-4">No products found</p>
           <Link href="/admin/products/new">
-            <Button className="bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 hover:from-primary-pink-700 hover:to-primary-pink-800 text-white">
+            <Button className="bg-gradient-to-r from-primary-brown-600 to-primary-brown-700 hover:from-primary-brown-700 hover:to-primary-brown-800 text-white">
               Create Your First Product
             </Button>
           </Link>
         </div>
       )}
     </div>
-  )
+  );
 }

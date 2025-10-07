@@ -13,6 +13,7 @@ import {
   BarChart3,
   FileText,
   Tags,
+  CreditCard,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -33,6 +34,7 @@ const navigation = [
   { name: "Users", href: "/admin/users", icon: Users },
   { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
   { name: "Reports", href: "/admin/reports", icon: FileText },
+  { name: "Test Payment", href: "/test-payment", icon: CreditCard },
   { name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
@@ -49,7 +51,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       {/* Header */}
       <div className="p-6 border-b border-admin-medium">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-r from-admin-accent to-primary-pink-300 rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-r from-admin-accent to-primary-brown-300 rounded-full flex items-center justify-center">
             <Crown className="w-6 h-6 text-white" />
           </div>
           <div>

@@ -15,7 +15,7 @@ export default function WishlistPage() {
   if (!mounted) {
     return (
       <div className="bg-white flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rich-beige"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rich-brown"></div>
       </div>
     );
   }
@@ -38,7 +38,7 @@ export default function WishlistPage() {
               for easy access.
             </p>
             <Link href="/products">
-              <Button className="bg-rich-beige hover:bg-rich-beige/90 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button className="bg-rich-brown hover:bg-rich-brown/90 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
                 <ShoppingBag className="mr-2" size={20} />
                 Browse Sarees
                 <ArrowRight className="ml-2" size={20} />
@@ -72,7 +72,7 @@ export default function WishlistPage() {
             <Button
               variant="outline"
               onClick={clearWishlist}
-              className="border-rich-beige/20 hover:bg-rich-beige/5 text-rich-beige"
+              className="border-rich-brown/20 hover:bg-rich-brown/5 text-rich-brown"
             >
               Clear All
             </Button>
@@ -96,7 +96,7 @@ export default function WishlistPage() {
           className="text-center mt-16"
         >
           <Link href="/products">
-            <Button className="bg-rich-beige hover:bg-rich-beige/90 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+            <Button className="bg-rich-brown hover:bg-rich-brown/90 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
               <ShoppingBag className="mr-2" size={20} />
               Continue Shopping
               <ArrowRight className="ml-2" size={20} />

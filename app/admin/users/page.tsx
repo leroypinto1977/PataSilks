@@ -139,8 +139,12 @@ export default function UsersManagement() {
 
       setUsers(
         users.map((user) =>
-          user.id === userId 
-            ? { ...user, suspended: true, suspended_at: new Date().toISOString() } 
+          user.id === userId
+            ? {
+                ...user,
+                suspended: true,
+                suspended_at: new Date().toISOString(),
+              }
             : user
         )
       );
@@ -161,8 +165,8 @@ export default function UsersManagement() {
 
       setUsers(
         users.map((user) =>
-          user.id === userId 
-            ? { ...user, suspended: false, suspended_at: null } 
+          user.id === userId
+            ? { ...user, suspended: false, suspended_at: null }
             : user
         )
       );
@@ -175,9 +179,12 @@ export default function UsersManagement() {
 
   const handleResetPassword = async (userId: string) => {
     try {
-      const response = await fetch(`/api/admin/users/${userId}/reset-password`, {
-        method: "POST",
-      });
+      const response = await fetch(
+        `/api/admin/users/${userId}/reset-password`,
+        {
+          method: "POST",
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to send reset email");
 
@@ -260,9 +267,11 @@ export default function UsersManagement() {
           <Card className="bg-card border-border">
             <CardContent className="p-6">
               <div className="flex items-center">
-                <Crown className="h-10 w-10 text-primary-pink-600" />
+                <Crown className="h-10 w-10 text-primary-brown-600" />
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-muted-foreground">Admins</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Admins
+                  </p>
                   <p className="text-3xl font-bold text-foreground">
                     {users.filter((u) => u.role === "ADMIN").length}
                   </p>
@@ -304,7 +313,9 @@ export default function UsersManagement() {
               <div className="flex items-center">
                 <Mail className="h-10 w-10 text-muted-foreground" />
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-muted-foreground">Verified</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Verified
+                  </p>
                   <p className="text-3xl font-bold text-foreground">
                     {users.filter((u) => u.email_confirmed_at).length}
                   </p>
@@ -324,7 +335,9 @@ export default function UsersManagement() {
               <div className="flex items-center">
                 <Ban className="h-10 w-10 text-muted-foreground" />
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-muted-foreground">Suspended</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Suspended
+                  </p>
                   <p className="text-3xl font-bold text-foreground">
                     {users.filter((u) => u.suspended).length}
                   </p>
@@ -398,7 +411,7 @@ export default function UsersManagement() {
           <CardContent>
             {loading ? (
               <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-pink-600"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-brown-600"></div>
               </div>
             ) : (
               <Table>
@@ -439,7 +452,7 @@ export default function UsersManagement() {
                           }
                           className={
                             user.role === "ADMIN"
-                              ? "bg-primary-pink-100 text-primary-pink-800 hover:bg-primary-pink-200"
+                              ? "bg-primary-brown-100 text-primary-brown-800 hover:bg-primary-brown-200"
                               : "bg-muted text-muted-foreground hover:bg-muted/80"
                           }
                         >
@@ -460,7 +473,9 @@ export default function UsersManagement() {
                         <div className="flex items-center space-x-2">
                           <Badge
                             variant={
-                              user.email_confirmed_at ? "default" : "destructive"
+                              user.email_confirmed_at
+                                ? "default"
+                                : "destructive"
                             }
                             className={
                               user.email_confirmed_at
@@ -468,7 +483,9 @@ export default function UsersManagement() {
                                 : "bg-red-100 text-red-800"
                             }
                           >
-                            {user.email_confirmed_at ? "Verified" : "Unverified"}
+                            {user.email_confirmed_at
+                              ? "Verified"
+                              : "Unverified"}
                           </Badge>
                           {user.suspended && (
                             <Badge
@@ -519,7 +536,7 @@ export default function UsersManagement() {
                                 Remove Admin
                               </DropdownMenuItem>
                             )}
-                            
+
                             {/* Account Management */}
                             <DropdownMenuItem
                               onClick={() => handleResetPassword(user.id)}
@@ -555,13 +572,17 @@ export default function UsersManagement() {
                                       Suspend User Account
                                     </AlertDialogTitle>
                                     <AlertDialogDescription>
-                                      Are you sure you want to suspend {user.email}? 
-                                      This will prevent them from signing in, but their account and data will remain intact. 
-                                      You can reactivate them later.
+                                      Are you sure you want to suspend{" "}
+                                      {user.email}? This will prevent them from
+                                      signing in, but their account and data
+                                      will remain intact. You can reactivate
+                                      them later.
                                     </AlertDialogDescription>
                                   </AlertDialogHeader>
                                   <AlertDialogFooter>
-                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogCancel>
+                                      Cancel
+                                    </AlertDialogCancel>
                                     <AlertDialogAction
                                       onClick={() => handleSuspendUser(user.id)}
                                       className="bg-yellow-600 hover:bg-yellow-700"
@@ -590,9 +611,11 @@ export default function UsersManagement() {
                                     Revoke User Access
                                   </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Are you sure you want to permanently revoke access for{" "}
-                                    {user.email}? This action cannot be undone and will permanently 
-                                    delete their account and all associated data including orders and profile information.
+                                    Are you sure you want to permanently revoke
+                                    access for {user.email}? This action cannot
+                                    be undone and will permanently delete their
+                                    account and all associated data including
+                                    orders and profile information.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>

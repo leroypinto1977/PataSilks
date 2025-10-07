@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { useWishlist } from "@/lib/wishlist-context";
 import {
@@ -34,6 +36,7 @@ export function Header() {
   const { user, signOut, isAdmin, isLoading, refreshProfile } = useAuth();
   const { getTotalItems } = useCart();
   const { state: wishlistState } = useWishlist();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,11 +80,20 @@ export function Header() {
   const totalItems = mounted ? getTotalItems() : 0;
 
   const navigationItems = [
+    { href: "/", label: "Home" },
     { href: "/products", label: "Sarees" },
     { href: "/products?newArrivals=true", label: "New Arrivals" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
+
+  // Function to check if a navigation item is active
+  const isActiveItem = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
     <motion.header
@@ -95,8 +107,8 @@ export function Header() {
       <div
         className={`absolute inset-0 backdrop-blur-md transition-all duration-300 ${
           isScrolled
-            ? "bg-white/95 border-b border-rich-beige/20 shadow-lg"
-            : "bg-white/90 border-b border-rich-beige/10"
+            ? "bg-white/95 border-b border-rich-brown/20 shadow-lg"
+            : "bg-white/90 border-b border-rich-brown/10"
         }`}
       />
 
@@ -104,44 +116,63 @@ export function Header() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="group flex items-center space-x-3">
-            {/* <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="w-10 h-10 bg-gradient-to-br from-rich-beige to-rich-beige/80 rounded-xl flex items-center justify-center shadow-lg"
-            >
-              <Sparkles className="w-6 h-6 text-white" />
-            </motion.div> */}
+          <Link href="/" className="group flex items-center">
             <motion.div
+              whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex flex-col"
+              className="flex items-center"
             >
-              <h1 className="text-2xl font-sans font-bold bg-gradient-to-r from-gray-900 to-rich-beige bg-clip-text text-transparent">
-                Patta Silks
-              </h1>
-              {/* <p className="text-xs text-gray-600 -mt-1">Premium Sarees</p> */}
+              <Image
+                src="/logo/logo_transparent.png"
+                alt="Patta Silks"
+                width={160}
+                height={60}
+                className="h-12 w-auto object-contain"
+                priority
+              />
             </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navigationItems.map((item, index) => (
-              <motion.div
-                key={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-              >
-                <Link
-                  href={item.href}
-                  className="relative text-gray-700 hover:text-rich-beige font-sans font-medium transition-colors duration-300 group"
+            {navigationItems.map((item, index) => {
+              const isActive = isActiveItem(item.href);
+              return (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
                 >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rich-beige transition-all duration-300 group-hover:w-full" />
-                </Link>
-              </motion.div>
-            ))}
+                  <Link
+                    href={item.href}
+                    className={`relative font-sans font-medium transition-all duration-300 group ${
+                      isActive
+                        ? "text-rich-brown"
+                        : "text-gray-700 hover:text-rich-brown"
+                    }`}
+                  >
+                    {item.label}
+                    {isActive ? (
+                      <motion.span
+                        layoutId="activeIndicator"
+                        className="absolute -bottom-1 left-0 w-full h-0.5 bg-rich-brown"
+                        initial={false}
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                        }}
+                      />
+                    ) : (
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rich-brown transition-all duration-300 group-hover:w-full" />
+                    )}
+                  </Link>
+                </motion.div>
+              );
+            })}
           </nav>
 
           {/* Right Side Actions */}
@@ -151,7 +182,7 @@ export function Header() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsSearchOpen(true)}
-              className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-rich-beige/10 hover:bg-rich-beige/20 text-gray-700 transition-colors duration-300"
+              className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-rich-brown/10 hover:bg-rich-brown/20 text-gray-700 transition-colors duration-300"
             >
               <Search size={18} />
             </motion.button>
@@ -161,14 +192,14 @@ export function Header() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-rich-beige/10 hover:bg-rich-beige/20 text-gray-700 transition-colors duration-300"
+                className="relative hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-rich-brown/10 hover:bg-rich-brown/20 text-gray-700 transition-colors duration-300"
               >
                 <Heart size={18} />
                 {wishlistState.itemCount > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-rich-beige text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold shadow-lg"
+                    className="absolute -top-1 -right-1 bg-rich-brown text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold shadow-lg"
                   >
                     {wishlistState.itemCount}
                   </motion.span>
@@ -181,14 +212,14 @@ export function Header() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative flex items-center justify-center w-10 h-10 rounded-full bg-rich-beige/10 hover:bg-rich-beige/20 text-gray-700 transition-colors duration-300"
+                className="relative flex items-center justify-center w-10 h-10 rounded-full bg-rich-brown/10 hover:bg-rich-brown/20 text-gray-700 transition-colors duration-300"
               >
                 <ShoppingCart size={18} />
                 {totalItems > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-rich-beige text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold shadow-lg"
+                    className="absolute -top-1 -right-1 bg-rich-brown text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold shadow-lg"
                   >
                     {totalItems}
                   </motion.span>
@@ -205,10 +236,10 @@ export function Header() {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="flex items-center space-x-2 p-2 rounded-full hover:bg-rich-beige/10 transition-colors duration-300"
+                        className="flex items-center space-x-2 p-2 rounded-full hover:bg-rich-brown/10 transition-colors duration-300"
                       >
                         <Avatar className="w-8 h-8">
-                          <AvatarFallback className="bg-rich-beige text-white font-semibold">
+                          <AvatarFallback className="bg-rich-brown text-white font-semibold">
                             {user.email?.charAt(0).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
@@ -257,7 +288,7 @@ export function Header() {
                     transition={{ delay: 0.5 }}
                   >
                     <Link href="/auth/signin">
-                      <Button className="bg-rich-beige hover:bg-rich-beige/90 text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                      <Button className="bg-rich-brown hover:bg-rich-brown/90 text-white shadow-lg hover:shadow-xl transition-all duration-300">
                         <User size={16} className="mr-2" />
                         Sign In
                       </Button>
@@ -272,7 +303,7 @@ export function Header() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-rich-beige/10 hover:bg-rich-beige/20 text-gray-700 transition-colors duration-300"
+              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-rich-brown/10 hover:bg-rich-brown/20 text-gray-700 transition-colors duration-300"
             >
               <AnimatePresence mode="wait">
                 {isMenuOpen ? (
@@ -309,27 +340,43 @@ export function Header() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden border-t border-rich-beige/20"
+              className="lg:hidden border-t border-rich-brown/20"
             >
               <div className="absolute inset-0 bg-white/95 backdrop-blur-md" />
               <div className="relative py-6">
                 <div className="flex flex-col space-y-2">
-                  {navigationItems.map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block px-4 py-3 text-gray-700 hover:text-rich-beige hover:bg-rich-beige/5 rounded-lg font-sans font-medium transition-colors duration-300"
+                  {navigationItems.map((item, index) => {
+                    const isActive = isActiveItem(item.href);
+                    return (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
                       >
-                        {item.label}
-                      </Link>
-                    </motion.div>
-                  ))}
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={`block px-4 py-3 rounded-lg font-sans font-medium transition-all duration-300 ${
+                            isActive
+                              ? "text-rich-brown bg-rich-brown/10 border-l-4 border-rich-brown"
+                              : "text-gray-700 hover:text-rich-brown hover:bg-rich-brown/5"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span>{item.label}</span>
+                            {isActive && (
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                className="w-2 h-2 bg-rich-brown rounded-full"
+                              />
+                            )}
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
             </motion.div>

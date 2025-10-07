@@ -1,9 +1,34 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { ProductCard } from "./product-card";
-import { SanityProductPreview } from "@/types/sanity";
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  images: string[];
+  slug: string;
+  category: {
+    name: string;
+    id?: string;
+  };
+  category_id?: string;
+  fabric: string;
+  color: string;
+  featured?: boolean;
+  new_arrival?: boolean;
+  active: boolean;
+  in_stock: boolean;
+  stock_count: number;
+  tags: string[];
+  created_at: string;
+  updated_at: string;
+}
 
 interface RelatedProductsProps {
-  products: SanityProductPreview[];
+  products: Product[];
 }
 
 export function RelatedProducts({ products }: RelatedProductsProps) {
@@ -22,7 +47,7 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
           className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"
         >
           You Might Also
-          <span className="text-rich-beige"> Like</span>
+          <span className="text-rich-brown"> Like</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -45,7 +70,7 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
       >
         {products.map((product, index) => (
           <motion.div
-            key={product._id}
+            key={product.id}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}

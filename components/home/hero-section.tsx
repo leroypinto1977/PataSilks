@@ -43,10 +43,10 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="inline-flex items-center space-x-2 bg-rich-beige/10 border border-rich-beige/20 rounded-full px-6 py-3"
+                className="inline-flex items-center space-x-2 bg-rich-brown/10 border border-rich-brown/20 rounded-full px-6 py-3"
               >
-                <Sparkles className="text-rich-beige" size={20} />
-                <span className="text-rich-beige font-semibold">
+                <Sparkles className="text-rich-brown" size={20} />
+                <span className="text-rich-brown font-semibold">
                   Premium Heritage Collection
                 </span>
               </motion.div>
@@ -60,7 +60,7 @@ export function HeroSection() {
               >
                 <span className="text-gray-900">Timeless</span>
                 <br />
-                <span className="text-rich-beige">Elegance</span>
+                <span className="text-rich-brown">Elegance</span>
                 <br />
                 <span className="text-gray-800">in Every Thread</span>
               </motion.h1>
@@ -89,7 +89,7 @@ export function HeroSection() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-rich-beige text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center"
+                  className="bg-rich-brown text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center"
                 >
                   Explore Collection
                   <ArrowRight size={20} className="ml-2" />
@@ -99,7 +99,7 @@ export function HeroSection() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border-2 border-rich-beige text-rich-beige px-8 py-4 rounded-full font-semibold hover:bg-rich-beige hover:text-white transition-all duration-300 flex items-center"
+                  className="border-2 border-rich-brown text-rich-brown px-8 py-4 rounded-full font-semibold hover:bg-rich-brown hover:text-white transition-all duration-300 flex items-center"
                 >
                   <Sparkles className="mr-2" size={20} />
                   New Arrivals
@@ -120,7 +120,7 @@ export function HeroSection() {
                     <Star
                       key={i}
                       size={20}
-                      className="fill-rich-beige text-rich-beige"
+                      className="fill-rich-brown text-rich-brown"
                     />
                   ))}
                 </div>
@@ -129,7 +129,7 @@ export function HeroSection() {
                 </span>
               </div>
               <div className="text-gray-700">
-                <span className="font-bold text-2xl text-rich-beige">
+                <span className="font-bold text-2xl text-rich-brown">
                   15,000+
                 </span>
                 <br />
@@ -148,14 +148,18 @@ export function HeroSection() {
             {/* Main Image */}
             <motion.div
               whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+              }}
               className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-warm-beige to-premium-beige shadow-2xl"
             >
               <Image
                 src="https://images.pexels.com/photos/8839898/pexels-photo-8839898.jpeg"
                 alt="Luxury silk saree collection"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-300"
               />
             </motion.div>
 
@@ -164,8 +168,9 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              whileHover={{ scale: 1.05 }}
-              className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-rich-beige/20"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-rich-brown/20 cursor-pointer"
             >
               <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 bg-green-500 rounded-full" />
@@ -182,11 +187,12 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
-              whileHover={{ scale: 1.05 }}
-              className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl border border-rich-beige/20"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl border border-rich-brown/20 cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Sparkles className="text-rich-beige" size={24} />
+                <Sparkles className="text-rich-brown" size={24} />
                 <div>
                   <p className="text-sm font-bold text-gray-900">
                     Heritage Craft

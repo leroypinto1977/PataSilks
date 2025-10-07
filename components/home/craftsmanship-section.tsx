@@ -31,36 +31,36 @@ export function CraftsmanshipSection() {
       title: "Handwoven Excellence",
       description:
         "Each thread is carefully selected and woven by master artisans using techniques passed down through generations.",
-      color: "from-primary-pink-500 to-primary-pink-700",
+      color: "from-primary-brown-500 to-primary-brown-700",
     },
     {
       icon: Heart,
       title: "Made with Love",
       description:
         "Every saree is crafted with passion and attention to detail, ensuring you feel special on every occasion.",
-      color: "from-rose-gold to-primary-pink-400",
+      color: "from-rose-gold to-primary-brown-400",
     },
     {
       icon: Crown,
       title: "Royal Heritage",
       description:
         "Our designs are inspired by the royal courts of ancient India, bringing timeless elegance to modern women.",
-      color: "from-primary-pink-600 to-primary-pink-800",
+      color: "from-primary-brown-600 to-primary-brown-800",
     },
     {
       icon: Palette,
       title: "Vibrant Colors",
       description:
         "Using premium dyes and traditional techniques to create colors that remain vibrant for years to come.",
-      color: "from-primary-pink-400 to-rose-gold",
+      color: "from-primary-brown-400 to-rose-gold",
     },
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary-pink-50 to-primary-pink-100 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-primary-brown-50 to-primary-brown-100 relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 w-64 h-64 border-2 border-primary-pink-300 rounded-full" />
+        <div className="absolute top-10 left-10 w-64 h-64 border-2 border-primary-brown-300 rounded-full" />
         <div className="absolute bottom-10 right-10 w-48 h-48 border border-blush rounded-full" />
         <div className="absolute top-1/3 right-1/4 w-32 h-32 border border-rose-gold rounded-full" />
       </div>
@@ -80,15 +80,15 @@ export function CraftsmanshipSection() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur rounded-full px-6 py-3 shadow-lg mb-6"
           >
-            <Sparkles className="text-primary-pink-600" size={20} />
-            <span className="text-primary-pink-700 font-semibold">
+            <Sparkles className="text-primary-brown-600" size={20} />
+            <span className="text-primary-brown-700 font-semibold">
               Our Craft
             </span>
           </motion.div>
 
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
             The Art of
-            <span className="bg-gradient-to-r from-primary-pink-600 to-primary-pink-700 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary-brown-600 to-primary-brown-700 bg-clip-text text-transparent">
               {" "}
               Perfection
             </span>
@@ -158,7 +158,7 @@ export function CraftsmanshipSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               whileHover={{ scale: 1.1 }}
-              className="absolute -top-6 -right-6 bg-gradient-to-r from-primary-pink-500 to-primary-pink-700 text-white rounded-full p-6 shadow-xl"
+              className="absolute -top-6 -right-6 bg-gradient-to-r from-primary-brown-500 to-primary-brown-700 text-white rounded-full p-6 shadow-xl"
             >
               <Crown size={24} />
             </motion.div>
@@ -190,11 +190,11 @@ export function CraftsmanshipSection() {
                   variants={itemVariants}
                   className="flex items-center space-x-4 group"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary-pink-500 to-primary-pink-700 rounded-full flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform duration-200">
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary-brown-500 to-primary-brown-700 rounded-full flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform duration-200">
                     {index + 1}
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-gray-900 group-hover:text-primary-pink-700 transition-colors">
+                    <h4 className="font-semibold text-gray-900 group-hover:text-primary-brown-700 transition-colors">
                       {step}
                     </h4>
                   </div>
@@ -234,7 +234,7 @@ export function CraftsmanshipSection() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-primary-pink-700 transition-colors">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-primary-brown-700 transition-colors">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">

@@ -87,7 +87,7 @@ export function ProductFilters({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && updateFilters()}
-          className="border-rich-beige/20 focus:border-rich-beige"
+          className="border-rich-brown/20 focus:border-rich-brown"
         />
       </div>
 
@@ -102,7 +102,7 @@ export function ProductFilters({
               value=""
               checked={selectedCategory === ""}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="accent-rich-beige focus:ring-rich-beige focus:ring-2"
+              className="accent-rich-brown focus:ring-rich-brown focus:ring-2"
             />
             <span className="text-gray-700">All Categories</span>
           </label>
@@ -117,7 +117,7 @@ export function ProductFilters({
                 value={category.name.toLowerCase()}
                 checked={selectedCategory === category.name.toLowerCase()}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="accent-rich-beige focus:ring-rich-beige focus:ring-2"
+                className="accent-rich-brown focus:ring-rich-brown focus:ring-2"
               />
               <span className="text-gray-700">{category.name}</span>
             </label>

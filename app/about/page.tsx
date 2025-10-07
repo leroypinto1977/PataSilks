@@ -24,7 +24,7 @@ export default function AboutPage() {
               className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
             >
               Our Story of
-              <span className="text-rich-beige"> Heritage</span>
+              <span className="text-rich-brown"> Heritage</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -52,8 +52,8 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-rich-beige" />
+                <div className="w-16 h-16 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="w-8 h-8 text-rich-brown" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">
                   {stat.value}
@@ -122,8 +122,8 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-20 h-20 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Award className="w-10 h-10 text-rich-beige" />
+              <div className="w-20 h-20 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Award className="w-10 h-10 text-rich-brown" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 Premium Materials
@@ -135,8 +135,8 @@ export default function AboutPage() {
             </div>
 
             <div className="text-center">
-              <div className="w-20 h-20 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Users className="w-10 h-10 text-rich-beige" />
+              <div className="w-20 h-20 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Users className="w-10 h-10 text-rich-brown" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 Master Artisans
@@ -148,8 +148,8 @@ export default function AboutPage() {
             </div>
 
             <div className="text-center">
-              <div className="w-20 h-20 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Heart className="w-10 h-10 text-rich-beige" />
+              <div className="w-20 h-20 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Heart className="w-10 h-10 text-rich-brown" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 Attention to Detail

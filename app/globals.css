@@ -6,15 +6,15 @@
 
 @layer base {
   :root {
-    /* Customer Website Theme - Light Pink & White */
-    --primary-pink: #f8e8e9;
-    --primary-pink-light: #fdf5f6;
-    --primary-pink-medium: #f5d0d3;
-    --primary-pink-dark: #e8b4b8;
-    --primary-pink-deep: #d4949a;
-    --rose-gold: #e8b4b8;
-    --blush: #f5c2c7;
-    --champagne: #f7e7ce;
+    /* Customer Website Theme - Premium Brown & Cream */
+    --primary-brown: #4b381e;
+    --primary-brown-light: #a68b6e;
+    --primary-brown-lighter: #d4c4b0;
+    --primary-brown-dark: #3d2f19;
+    --primary-brown-deep: #2f2514;
+    --golden-tan: #c9a870;
+    --warm-cream: #f5f1ea;
+    --terracotta: #b85c38;
 
     /* Admin Panel Theme - Dark Monochromatic */
     --admin-black: #000000;
@@ -33,31 +33,31 @@
     --font-accent: "Crimson Text", Georgia, serif;
 
     /* Shadows & Effects */
-    --shadow-soft: rgba(232, 180, 184, 0.1);
-    --shadow-medium: rgba(212, 148, 154, 0.15);
-    --border-light: rgba(232, 180, 184, 0.2);
-    --border-medium: rgba(232, 180, 184, 0.4);
+    --shadow-soft: rgba(75, 56, 30, 0.1);
+    --shadow-medium: rgba(75, 56, 30, 0.15);
+    --border-light: rgba(75, 56, 30, 0.2);
+    --border-medium: rgba(75, 56, 30, 0.4);
 
-    /* Original shadcn variables - updated for pink theme */
-    --background: 30 25% 95%;
-    --foreground: 330 20% 15%;
-    --card: 30 25% 98%;
-    --card-foreground: 330 20% 15%;
-    --popover: 30 25% 98%;
-    --popover-foreground: 330 20% 15%;
-    --primary: 30 25% 65%;
+    /* Original shadcn variables - updated for brown theme */
+    --background: 32 23% 96%;
+    --foreground: 32 30% 12%;
+    --card: 32 23% 98%;
+    --card-foreground: 32 30% 12%;
+    --popover: 32 23% 98%;
+    --popover-foreground: 32 30% 12%;
+    --primary: 32 44% 20%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 30 25% 90%;
-    --secondary-foreground: 330 20% 15%;
-    --muted: 30 25% 94%;
-    --muted-foreground: 330 8% 46%;
-    --accent: 30 25% 85%;
-    --accent-foreground: 330 20% 15%;
+    --secondary: 32 23% 90%;
+    --secondary-foreground: 32 30% 12%;
+    --muted: 32 23% 94%;
+    --muted-foreground: 32 10% 40%;
+    --accent: 38 42% 60%;
+    --accent-foreground: 32 30% 12%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 30 25% 86%;
-    --input: 30 25% 86%;
-    --ring: 30 25% 65%;
+    --border: 32 23% 86%;
+    --input: 32 23% 86%;
+    --ring: 32 44% 20%;
     --radius: 1rem;
   }
 
@@ -117,7 +117,7 @@
 
   .premium-text {
     font-family: var(--font-accent);
-    @apply italic text-primary-pink-400;
+    @apply italic text-primary-brown-400;
   }
 
   /* Smooth Scrolling */
@@ -132,42 +132,42 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #f5f0e8; /* warm-beige */
+    background: #f5f1ea; /* warm-cream */
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #d4c4b0; /* rich-beige */
+    background: #a68b6e; /* medium brown */
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #c4b299; /* darker rich-beige */
+    background: #4b381e; /* primary brown */
   }
 }
 
 @layer components {
   /* Premium Button Styles */
   .btn-primary {
-    @apply bg-gradient-to-r from-rich-beige to-rich-beige hover:from-rich-beige hover:to-rich-beige text-white border-none px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-out shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    @apply bg-gradient-to-r from-rich-brown to-primary-brown-600 hover:from-primary-brown-600 hover:to-rich-brown text-white border-none px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-out shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
   }
 
   .btn-secondary {
-    @apply bg-white text-rich-beige border-2 border-rich-beige/30 hover:bg-rich-beige/5 hover:border-rich-beige px-6 py-2 rounded-lg transition-all duration-300;
+    @apply bg-white text-rich-brown border-2 border-rich-brown/30 hover:bg-rich-brown/5 hover:border-rich-brown px-6 py-2 rounded-lg transition-all duration-300;
   }
 
   /* Premium Card Styles */
   .luxury-card {
-    @apply bg-white/90 backdrop-blur-sm border border-rich-beige/20 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1;
+    @apply bg-white/90 backdrop-blur-sm border border-rich-brown/20 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1;
   }
 
   .premium-card {
-    background: linear-gradient(145deg, #ffffff, #f5f0e8);
-    @apply border border-rich-beige rounded-2xl shadow-lg;
+    background: linear-gradient(145deg, #ffffff, #f5f1ea);
+    @apply border border-rich-brown rounded-2xl shadow-lg;
   }
 
   /* Product Card Styles */
   .product-card {
-    @apply bg-white border border-rich-beige/20 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1;
+    @apply bg-white border border-rich-brown/20 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1;
   }
 
   .product-card:hover {
@@ -177,12 +177,12 @@
 
   /* Navigation Styles */
   .nav-link {
-    @apply text-gray-700 hover:text-primary-pink-400 font-medium transition-colors duration-200 relative;
+    @apply text-gray-700 hover:text-primary-brown-500 font-medium transition-colors duration-200 relative;
   }
 
   .nav-link::after {
     content: "";
-    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-pink-300 to-rose-gold transition-all duration-300;
+    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-brown-400 to-golden-tan transition-all duration-300;
   }
 
   .nav-link:hover::after {
@@ -198,18 +198,14 @@
 
   /* Modern Gradient Backgrounds */
   .gradient-primary {
-    background: linear-gradient(
-      135deg,
-      var(--primary-pink-light) 0%,
-      #ffffff 100%
-    );
+    background: linear-gradient(135deg, var(--warm-cream) 0%, #ffffff 100%);
   }
 
   .gradient-hero {
     background: linear-gradient(
       135deg,
-      var(--primary-pink-light) 0%,
-      var(--champagne) 50%,
+      var(--warm-cream) 0%,
+      var(--primary-brown-lighter) 50%,
       #ffffff 100%
     );
   }
@@ -253,7 +249,7 @@
     background: linear-gradient(
       90deg,
       #f8f9fa 25%,
-      var(--primary-pink-light) 50%,
+      var(--warm-cream) 50%,
       #f8f9fa 75%
     );
     background-size: 200px 100%;
@@ -279,8 +275,8 @@
 
   /* Elegant Shadows */
   .shadow-elegant {
-    box-shadow: 0 10px 40px rgba(232, 180, 184, 0.1),
-      0 4px 12px rgba(232, 180, 184, 0.05);
+    box-shadow: 0 10px 40px rgba(75, 56, 30, 0.1),
+      0 4px 12px rgba(75, 56, 30, 0.05);
   }
 }
 

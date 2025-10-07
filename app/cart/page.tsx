@@ -22,7 +22,7 @@ export default function CartPage() {
     return (
       <div className="bg-white flex items-center justify-center py-20">
         <div className="text-center">
-          <ShoppingBag className="mx-auto h-16 w-16 text-rich-beige mb-4" />
+          <ShoppingBag className="mx-auto h-16 w-16 text-rich-brown mb-4" />
           <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">
             Your cart is empty
           </h1>
@@ -68,7 +68,7 @@ export default function CartPage() {
                 Order Summary
               </h2>
 
-              <div className="space-y-3 border-t border-rich-beige/20 pt-4">
+              <div className="space-y-3 border-t border-rich-brown/20 pt-4">
                 <div className="flex justify-between text-gray-700">
                   <span>Subtotal</span>
                   <span>{formatPrice(getTotalPrice())}</span>
@@ -81,7 +81,7 @@ export default function CartPage() {
                   <span>Tax</span>
                   <span>{formatPrice(getTotalPrice() * 0.18)}</span>
                 </div>
-                <div className="border-t border-rich-beige/20 pt-3">
+                <div className="border-t border-rich-brown/20 pt-3">
                   <div className="flex justify-between text-lg font-bold text-gray-900">
                     <span>Total</span>
                     <span>{formatPrice(getTotalPrice() * 1.18)}</span>
@@ -99,7 +99,7 @@ export default function CartPage() {
               <Link href="/products" className="block w-full">
                 <Button
                   variant="outline"
-                  className="w-full border-rich-beige/20 hover:bg-rich-beige/5"
+                  className="w-full border-rich-brown/20 hover:bg-rich-brown/5"
                 >
                   Continue Shopping
                 </Button>

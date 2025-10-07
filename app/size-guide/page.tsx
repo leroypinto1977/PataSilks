@@ -94,10 +94,10 @@ export default function SizeGuidePage() {
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 bg-rich-beige/10 border border-rich-beige/20 rounded-full px-6 py-3 mb-6"
+              className="inline-flex items-center space-x-2 bg-rich-brown/10 border border-rich-brown/20 rounded-full px-6 py-3 mb-6"
             >
-              <Ruler className="text-rich-beige" size={20} />
-              <span className="text-rich-beige font-semibold">Size Guide</span>
+              <Ruler className="text-rich-brown" size={20} />
+              <span className="text-rich-brown font-semibold">Size Guide</span>
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -105,7 +105,7 @@ export default function SizeGuidePage() {
               className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
             >
               Find Your Perfect
-              <span className="text-rich-beige"> Size</span>
+              <span className="text-rich-brown"> Size</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -139,8 +139,8 @@ export default function SizeGuidePage() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white rounded-2xl shadow-lg p-6 text-center"
               >
-                <div className="w-16 h-16 bg-rich-beige/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <tip.icon className="w-8 h-8 text-rich-beige" />
+                <div className="w-16 h-16 bg-rich-brown/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <tip.icon className="w-8 h-8 text-rich-brown" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">
                   {tip.title}
@@ -164,7 +164,7 @@ export default function SizeGuidePage() {
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-rich-beige/10">
+                <thead className="bg-rich-brown/10">
                   <tr>
                     <th className="px-6 py-4 text-left font-semibold text-gray-900">
                       Size
@@ -219,7 +219,7 @@ export default function SizeGuidePage() {
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-rich-beige/10">
+                <thead className="bg-rich-brown/10">
                   <tr>
                     <th className="px-6 py-4 text-left font-semibold text-gray-900">
                       Size
@@ -272,10 +272,10 @@ export default function SizeGuidePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-rich-beige/5 rounded-2xl p-8"
+          className="bg-rich-brown/5 rounded-2xl p-8"
         >
           <div className="flex items-start space-x-4 mb-6">
-            <AlertCircle className="w-6 h-6 text-rich-beige flex-shrink-0 mt-1" />
+            <AlertCircle className="w-6 h-6 text-rich-brown flex-shrink-0 mt-1" />
             <h3 className="text-xl font-bold text-gray-900">Important Notes</h3>
           </div>
           <div className="space-y-4 text-gray-700">
@@ -318,13 +318,13 @@ export default function SizeGuidePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/contact"
-              className="bg-rich-beige text-white px-8 py-3 rounded-lg font-semibold hover:bg-rich-beige/90 transition-colors"
+              className="bg-rich-brown text-white px-8 py-3 rounded-lg font-semibold hover:bg-rich-brown/90 transition-colors"
             >
               Contact Us
             </a>
             <a
               href="tel:+15551234567"
-              className="border border-rich-beige text-rich-beige px-8 py-3 rounded-lg font-semibold hover:bg-rich-beige hover:text-white transition-colors"
+              className="border border-rich-brown text-rich-brown px-8 py-3 rounded-lg font-semibold hover:bg-rich-brown hover:text-white transition-colors"
             >
               Call Us
             </a>
